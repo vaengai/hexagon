@@ -1,0 +1,66 @@
+# Node.js / React / Vite
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.DS_Store
+frontend/.vite/
+frontend/.next/
+frontend/.cache/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/.eslintcache
+
+# TypeScript
+frontend/tsconfig.tsbuildinfo
+
+# Python / FastAPI
+backend/__pycache__/
+backend/**/*.pyc
+backend/.env
+backend/venv/
+backend/env/
+backend/.DS_Store
+backend/.pytest_cache/
+backend/.mypy_cache/
+backend/.coverage
+backend/coverage.xml
+backend/htmlcov/
+backend/.vscode/
+backend/.ruff_cache/
+backend/.pylint.d/
+backend/.python-version
+
+# Alembic
+backend/alembic/versions/
+
+# Docker
+*.log
+*.pid
+
+# VSCode
+.vscode/
+.history/
+
+# macOS
+.DS_Store
+
+# General
+.env
+*.env
+*.local
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Logs
+logs/
+*.log
+
+# Coverage reports
+coverage/
+coverage-final.json
+
+# Misc
+setup.sh~

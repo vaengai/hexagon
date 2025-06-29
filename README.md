@@ -21,29 +21,37 @@ A full-stack habit tracking application built with React, FastAPI, PostgreSQL, a
 
 ## Project Structure
 
-```
+````
+```text
 habit-tracker/
 ├── frontend/                 # React application
 │   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── hooks/
-│   │   ├── services/
-│   │   └── types/
+│   │   ├── components/       # Reusable UI components
+│   │   ├── pages/            # Page-level components/routes
+│   │   ├── hooks/            # Custom React hooks
+│   │   ├── services/         # API and utility services
+│   │   └── types/            # TypeScript type definitions
+│   ├── public/               # Static assets
 │   ├── package.json
+│   ├── tsconfig.json
 │   └── vite.config.ts
 ├── backend/                  # FastAPI application
 │   ├── app/
-│   │   ├── api/
-│   │   ├── core/
-│   │   ├── models/
-│   │   └── services/
+│   │   ├── api/              # API route definitions
+│   │   ├── core/             # Core settings, config, security
+│   │   ├── models/           # Database models and schemas
+│   │   ├── services/         # Business logic and services
+│   │   └── main.py           # FastAPI app entrypoint
 │   ├── requirements.txt
-│   └── main.py
-├── docker-compose.yml
-├── setup.sh
-└── README.md
-```
+│   ├── alembic/              # Database migrations
+│   └── .env.example
+├── docker-compose.yml        # Docker Compose configuration
+├── setup.sh                  # Project setup script
+├── README.md                 # Project documentation
+└── LICENSE                   # License file
+````
+
+````
 
 ## Quick Start
 
@@ -53,9 +61,10 @@ habit-tracker/
    cd habit-tracker
    chmod +x setup.sh
    ./setup.sh
-   ```
+````
 
 2. **Start the application**:
+
    ```bash
    docker-compose up -d
    ```
@@ -76,6 +85,7 @@ habit-tracker/
 ### Backend Setup
 
 1. **Create virtual environment**:
+
    ```bash
    cd backend
    python -m venv venv
@@ -83,17 +93,20 @@ habit-tracker/
    ```
 
 2. **Install dependencies**:
+
    ```bash
    pip install -r requirements.txt
    ```
 
 3. **Set environment variables**:
+
    ```bash
    cp .env.example .env
    # Edit .env with your database credentials
    ```
 
 4. **Run migrations**:
+
    ```bash
    python -m alembic upgrade head
    ```
@@ -106,6 +119,7 @@ habit-tracker/
 ### Frontend Setup
 
 1. **Install dependencies**:
+
    ```bash
    cd frontend
    npm install
@@ -119,6 +133,7 @@ habit-tracker/
 ### Database Setup
 
 1. **Create PostgreSQL database**:
+
    ```sql
    CREATE DATABASE habit_tracker;
    CREATE USER habit_user WITH PASSWORD 'your_password';
@@ -126,10 +141,11 @@ habit-tracker/
    ```
 
 2. **Redis setup**:
+
    ```bash
    # Using Docker
    docker run -d -p 6379:6379 redis:7-alpine
-   
+
    # Or install locally
    # Ubuntu/Debian: sudo apt-get install redis-server
    # macOS: brew install redis
@@ -138,23 +154,27 @@ habit-tracker/
 ## API Endpoints
 
 ### Authentication
+
 - `POST /api/auth/register` - Register new user
 - `POST /api/auth/login` - User login
 - `POST /api/auth/refresh` - Refresh access token
 
 ### Habits
+
 - `GET /api/habits` - Get user habits
 - `POST /api/habits` - Create new habit
 - `PUT /api/habits/{id}` - Update habit
 - `DELETE /api/habits/{id}` - Delete habit
 
 ### Habit Entries
+
 - `GET /api/habits/{id}/entries` - Get habit entries
 - `POST /api/habits/{id}/entries` - Record habit completion
 - `PUT /api/entries/{id}` - Update entry
 - `DELETE /api/entries/{id}` - Delete entry
 
 ### Analytics
+
 - `GET /api/analytics/streaks` - Get streak data
 - `GET /api/analytics/completion-rates` - Get completion rates
 - `GET /api/analytics/trends` - Get trend data
@@ -162,6 +182,7 @@ habit-tracker/
 ## Environment Variables
 
 ### Backend (.env)
+
 ```
 DATABASE_URL=postgresql://habit_user:password@localhost:5432/habit_tracker
 REDIS_URL=redis://localhost:6379
@@ -171,6 +192,7 @@ REFRESH_TOKEN_EXPIRE_DAYS=7
 ```
 
 ### Frontend (.env)
+
 ```
 VITE_API_URL=http://localhost:8000
 VITE_APP_NAME=Habit Tracker
@@ -199,12 +221,14 @@ docker-compose up -d --build
 ### Running Tests
 
 **Backend tests**:
+
 ```bash
 cd backend
 pytest
 ```
 
 **Frontend tests**:
+
 ```bash
 cd frontend
 npm run test
@@ -213,6 +237,7 @@ npm run test
 ### Code Quality
 
 **Backend linting**:
+
 ```bash
 cd backend
 flake8 .
@@ -220,6 +245,7 @@ black .
 ```
 
 **Frontend linting**:
+
 ```bash
 cd frontend
 npm run lint
@@ -259,15 +285,18 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ### Common Issues
 
 1. **Database connection errors**:
+
    - Check PostgreSQL is running
    - Verify connection string in .env
    - Ensure database and user exist
 
 2. **Redis connection errors**:
+
    - Check Redis is running: `redis-cli ping`
    - Verify Redis URL in environment variables
 
 3. **CORS errors**:
+
    - Check frontend URL is in backend CORS settings
    - Verify API_URL in frontend environment
 

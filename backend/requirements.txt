@@ -1,0 +1,11 @@
+FastAPI
+uvicorn
+psycopg2-binary
+redis
+python-dotenv
+alembic
+pydantic
+fastapi-users
+bcrypt
+pytest
+httpx

@@ -1,0 +1,27 @@
+{
+  "name": "habit-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "test": "jest",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.0.0",
+    "axios": "^0.21.1",
+    "tailwindcss": "^2.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.0",
+    "vite": "^2.0.0",
+    "eslint": "^7.0.0",
+    "prettier": "^2.0.0",
+    "jest": "^27.0.0"
+  }
+}
