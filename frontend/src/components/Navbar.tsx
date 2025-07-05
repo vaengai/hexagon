@@ -16,7 +16,7 @@ export default function Navbar() {
       <div className="flex items-center gap-6 ml-auto">
         <i className="bx bx-bell text-4xl hover:text-white text-gray-500 font-light"></i>
         <Menu>
-          <MenuButton className="focus:outline-none">
+          <MenuButton className="focus:outline-none cursor-pointer">
             <img
               src={user_img}
               alt="Avatar"

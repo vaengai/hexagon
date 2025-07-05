@@ -1,9 +1,11 @@
+import { PlusIcon } from "@heroicons/react/24/solid";
+
 export default function Hero() {
   return (
     <div className="relative isolate px-6 pt-14 lg:px-8">
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+        className="absolute inset-0 -z-10 blur-3xl bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
       >
         <div
           style={{
@@ -15,19 +17,24 @@ export default function Hero() {
       </div>
       <div className="mx-auto max-w-6xl py-32 sm:py-48 lg:py-56">
         <div className="text-center">
-          <h1 className="text-5xl font-extralight tracking-tight text-balance text-sky-400 sm:text-7xl">
+          <h1 className="text-5xl font-extrabold tracking-tight text-balance text-sky-400 sm:text-7xl">
             Your journey to discipline starts here...
           </h1>
-          <p className="mt-8 text-lg font-light text-pretty text-white sm:text-xl/8">
+          <p className="mt-8 text-xl sm:text-4xl font-bold text-white">
             Stay consistent, track your progress, and become the best version of
             yourself.
           </p>
-          <div className="mt-10 flex items-center justify-center gap-x-6">
+          {/* Centered Card for Add Habit */}
+          <div className="flex justify-center mt-10">
             <button
+              onClick={() => console.log("Add Habit Clicked")}
+              className="bg-white/5 active:scale-[.98] rounded-md shadow-md hover:shadow-lg cursor-pointer p-8 flex flex-col items-center w-sm border-sky-400 focus:outline-none focus:ring-2 data-focus:bg-white/10 transition transform"
               type="button"
-              className="rounded-lg bg-sky-100 px-8 py-4 text-lg font-semibold shadow-xs hover:bg-sky-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-200"
             >
-              Add Habit
+              <PlusIcon className="w-16 h-16 mb-2 text-sky-400" />
+              <p className="mt-4 text-lg font-light text-white text-center">
+                Create a new habit to start tracking your progress!
+              </p>
             </button>
           </div>
         </div>
