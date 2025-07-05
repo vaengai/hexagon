@@ -1,6 +1,10 @@
 import { PlusIcon } from "@heroicons/react/24/solid";
+import { AddHabit } from "./AddHabit.tsx";
+import { useState } from "react";
 
 export default function Hero() {
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="relative isolate px-6 pt-14 lg:px-8">
       <div
@@ -29,7 +33,7 @@ export default function Hero() {
           {/* Centered Card for Add Habit */}
           <div className="flex justify-center mt-10">
             <button
-              onClick={() => console.log("Add Habit Clicked")}
+              onClick={() => setOpen(true)}
               className="bg-white/5 active:scale-[.98] rounded-md shadow-2xl hover:shadow-lg cursor-pointer p-8 flex flex-col items-center w-sm border-sky-400 focus:outline-none focus:ring-2 data-focus:bg-white/10 transition transform shadow-sky-600"
               type="button"
             >
@@ -58,6 +62,7 @@ export default function Hero() {
           className="overflow-x-hidden relative left-1/2 -translate-x-1/2 w-[90vw] max-w-[36rem] aspect-[1155/678] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
         />
       </div>
+      <AddHabit open={open} setOpen={setOpen} />
     </div>
   );
 }
