@@ -34,7 +34,7 @@ export default function Hero() {
               type="button"
             >
               <PlusIcon className="w-16 h-16 mb-2 text-gray-300" />
-              <div className="flex h-10 w-48 items-center justify-center rounded-lg bg-gradient-to-r from-purple-500 to-yellow-500 p-[1.5px] text-white">
+              <div className="flex h-12 w-48 items-center justify-center rounded-lg bg-gradient-to-r from-sky-800 to-rose-800 p-[1.5px] text-white">
                 <div className="flex h-full w-full items-center justify-center rounded-lg bg-neutral-800">
                   Add your first habit
                 </div>
