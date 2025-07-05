@@ -16,11 +16,11 @@ export default function Navbar() {
       <div className="flex items-center gap-6 ml-auto">
         <i className="bx bx-bell text-4xl hover:text-white text-gray-500 font-light"></i>
         <Menu>
-          <MenuButton className="focus:outline-none cursor-pointer">
+          <MenuButton className="focus:outline-none cursor-pointer hover:animate-pulse">
             <img
               src={user_img}
               alt="Avatar"
-              className="w-14 h-14 rounded-full border-none"
+              className="w-14 h-14 rounded-full border-white"
             />
           </MenuButton>
 
@@ -31,27 +31,27 @@ export default function Navbar() {
           >
             <MenuItem>
               <button className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-white/10">
-                <PencilSquareIcon className="size-6 fill-white/30" />
+                <PencilSquareIcon className="size-6 fill-white" />
                 Profile
               </button>
             </MenuItem>
             <MenuItem>
               <button className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-white/10">
-                <AdjustmentsHorizontalIcon className="size-6 fill-white/30" />
+                <AdjustmentsHorizontalIcon className="size-6 fill-white" />
                 Settings
               </button>
             </MenuItem>
             <MenuItem>
               <button className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-white/10">
-                <ChartBarSquareIcon className="size-6 fill-white/30" />
+                <ChartBarSquareIcon className="size-6 fill-white" />
                 Dashboard
               </button>
             </MenuItem>
             <div className="my-1 h-px bg-white/5" />
 
             <MenuItem>
-              <button className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-white/10 text-red-300">
-                <ArrowRightStartOnRectangleIcon className="size-6 fill-white/30" />
+              <button className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-red-700 bg-red-400">
+                <ArrowRightStartOnRectangleIcon className="size-6 fill-white" />
                 Logout
               </button>
             </MenuItem>
