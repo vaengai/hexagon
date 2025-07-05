@@ -20,22 +20,27 @@ export default function Hero() {
       <div className="mx-auto max-w-6xl py-32 sm:py-48 lg:py-56">
         <div className="text-center">
           <h1 className="text-5xl font-extrabold tracking-tight text-balance text-sky-400 sm:text-7xl">
-            Your journey to discipline starts here...
+            Build Better Habits. Your journey to discipline starts here...
           </h1>
           <p className="mt-8 text-xl sm:text-4xl font-bold text-white">
             Stay consistent, track your progress, and become the best version of
-            yourself.
+            yourself
           </p>
           {/* Centered Card for Add Habit */}
           <div className="flex justify-center mt-10">
             <button
               onClick={() => console.log("Add Habit Clicked")}
-              className="bg-white/5 active:scale-[.98] rounded-md shadow-md hover:shadow-lg cursor-pointer p-8 flex flex-col items-center w-sm border-sky-400 focus:outline-none focus:ring-2 data-focus:bg-white/10 transition transform"
+              className="bg-white/5 active:scale-[.98] rounded-md shadow-2xl hover:shadow-lg cursor-pointer p-8 flex flex-col items-center w-sm border-sky-400 focus:outline-none focus:ring-2 data-focus:bg-white/10 transition transform shadow-sky-600"
               type="button"
             >
-              <PlusIcon className="w-16 h-16 mb-2 text-sky-400" />
+              <PlusIcon className="w-16 h-16 mb-2 text-gray-300" />
+              <div className="flex h-10 w-48 items-center justify-center rounded-full bg-gradient-to-r from-purple-500 to-yellow-500 p-[1.5px] text-white">
+                <div className="flex h-full w-full items-center justify-center rounded-full bg-gray-900">
+                  Add your first habit
+                </div>
+              </div>
               <p className="mt-4 text-lg font-light text-white text-center">
-                Create a new habit to start tracking your progress!
+                Create a new habit to start tracking your progress
               </p>
             </button>
           </div>
