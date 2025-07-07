@@ -34,12 +34,12 @@ export default function Hero() {
           <div className="flex justify-center mt-10">
             <button
               onClick={() => setOpen(true)}
-              className="bg-white/5 active:scale-[.98] rounded-md shadow-2xl hover:shadow-lg cursor-pointer p-8 flex flex-col items-center w-sm border-sky-400 focus:outline-none focus:ring-2 data-focus:bg-white/10 transition transform shadow-sky-600"
+              className="rounded-md shadow-2xs hover:shadow-lg cursor-pointer p-8 flex flex-col items-center w-sm border-sky-400 shadow-sky-200 border-2"
               type="button"
             >
               <PlusIcon className="w-16 h-16 mb-2 text-gray-300" />
               <div className="flex h-12 w-48 items-center justify-center rounded-lg bg-gradient-to-r from-sky-800 to-rose-800 p-[1.5px] text-white">
-                <div className="flex h-full w-full items-center justify-center rounded-lg bg-neutral-800">
+                <div className="flex h-full w-full items-center justify-center rounded-lg bg-slate-700">
                   Add your first habit
                 </div>
               </div>
