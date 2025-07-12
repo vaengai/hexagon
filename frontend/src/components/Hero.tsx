@@ -29,7 +29,7 @@ export default function Hero() {
           {/* Centered Card for Add Habit */}
           <div className="flex justify-center mt-10">
             <button
-              onClick={() => setOpen(true)}
+              onClick={() => console.log("Button clicked")}
               className="rounded-md shadow-2xs hover:shadow-lg cursor-pointer p-8 flex flex-col items-center w-sm border-sky-400 shadow-sky-200 border-2"
               type="button"
             >
