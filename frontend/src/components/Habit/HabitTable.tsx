@@ -12,6 +12,7 @@ const habitData: Habit[] = [
     category: "Health",
     progress: 3,
     goal: 7,
+    active: true,
   },
   {
     id: "2",
@@ -20,6 +21,7 @@ const habitData: Habit[] = [
     category: "Personal Development",
     progress: 7,
     goal: 7,
+    active: true,
   },
   {
     id: "3",
@@ -28,6 +30,7 @@ const habitData: Habit[] = [
     category: "Wellness",
     progress: 1,
     goal: 7,
+    active: true,
   },
   {
     id: "4",
@@ -36,6 +39,7 @@ const habitData: Habit[] = [
     category: "Health",
     progress: 7,
     goal: 7,
+    active: true,
   },
   {
     id: "5",
@@ -44,6 +48,7 @@ const habitData: Habit[] = [
     category: "Mindfulness",
     progress: 4,
     goal: 7,
+    active: true,
   },
   {
     id: "6",
@@ -52,6 +57,7 @@ const habitData: Habit[] = [
     category: "Career",
     progress: 0,
     goal: 7,
+    active: true,
   },
   {
     id: "7",
@@ -60,6 +66,7 @@ const habitData: Habit[] = [
     category: "Hobby",
     progress: 2,
     goal: 5,
+    active: true,
   },
   {
     id: "8",
@@ -68,6 +75,7 @@ const habitData: Habit[] = [
     category: "Health",
     progress: 7,
     goal: 7,
+    active: true,
   },
   {
     id: "9",
@@ -76,6 +84,7 @@ const habitData: Habit[] = [
     category: "Fitness",
     progress: 1,
     goal: 7,
+    active: true,
   },
   {
     id: "10",
@@ -84,6 +93,7 @@ const habitData: Habit[] = [
     category: "Wellness",
     progress: 6,
     goal: 7,
+    active: true,
   },
   {
     id: "11",
@@ -92,6 +102,7 @@ const habitData: Habit[] = [
     category: "Knowledge",
     progress: 3,
     goal: 7,
+    active: true,
   },
   {
     id: "12",
@@ -100,6 +111,7 @@ const habitData: Habit[] = [
     category: "Mindfulness",
     progress: 7,
     goal: 7,
+    active: true,
   },
 ];
 export function HabitTable() {

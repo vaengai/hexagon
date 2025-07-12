@@ -10,15 +10,16 @@ import {
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Label } from "@headlessui/react";
 
 export type Habit = {
   id: string;
@@ -27,6 +28,7 @@ export type Habit = {
   category: string;
   progress: number;
   goal: number;
+  active: boolean;
 };
 
 export const columns: ColumnDef<Habit>[] = [
@@ -90,7 +92,11 @@ export const columns: ColumnDef<Habit>[] = [
     accessorKey: "goal",
     header: "Goal",
   },
-
+  {
+    accessorKey: "active",
+    header: "Active",
+    cell: () => <Switch id="active-status-ind" />,
+  },
   {
     id: "actions",
     header: "Actions",
