@@ -32,8 +32,8 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="max-w-7xl w-full mx-auto rounded-md border border-neutral-800">
-      <Table className="text-xl">
+    <div className="max-w-8xl w-full mx-auto rounded-md border border-neutral-800">
+      <Table className="text-lg">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow
@@ -42,7 +42,7 @@ export function DataTable<TData, TValue>({
             >
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead className="text-sky-300 py-4" key={header.id}>
+                  <TableHead className="text-neutral-400 py-4" key={header.id}>
                     {header.isPlaceholder
                       ? null
                       : flexRender(
