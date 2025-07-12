@@ -20,6 +20,6 @@ export const columns: ColumnDef<Habit>[] = [
   },
   {
     accessorKey: "category",
-    header: "Type",
+    header: "Category",
   },
 ];

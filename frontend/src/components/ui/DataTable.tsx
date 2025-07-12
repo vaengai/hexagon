@@ -61,7 +61,7 @@ export function DataTable<TData, TValue>({
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
-                className="border-b border-neutral-800"
+                className="border-b border-neutral-800 hover:bg-neutral-800"
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id} className="py-4">
@@ -71,7 +71,7 @@ export function DataTable<TData, TValue>({
               </TableRow>
             ))
           ) : (
-            <TableRow>
+            <TableRow className=" border-neutral-800 hover:bg-neutral-800">
               <TableCell colSpan={columns.length} className="h-24 text-center">
                 No results.
               </TableCell>

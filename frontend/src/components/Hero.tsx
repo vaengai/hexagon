@@ -62,7 +62,7 @@ export default function Hero() {
           className="overflow-x-hidden relative left-1/2 -translate-x-1/2 w-[90vw] max-w-[36rem] aspect-[1155/678] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
         />
       </div>
-      <AddHabit open={open} setOpen={setOpen} />
+      {/* <AddHabit open={open} setOpen={setOpen} /> */}
     </div>
   );
 }

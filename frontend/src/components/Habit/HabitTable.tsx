@@ -5,26 +5,44 @@ import type { Habit } from "./columns";
 import { DataTable } from "../ui/DataTable";
 
 const habitData: Habit[] = [
-  {
-    id: "1",
-    title: "Morning Run",
-    status: "in_progress",
-    category: "Health",
-  },
+  { id: "1", title: "Morning Run", status: "in_progress", category: "Health" },
   {
     id: "2",
     title: "Read 30 mins",
     status: "done",
     category: "Personal Development",
   },
+  { id: "3", title: "Meditation", status: "pending", category: "Wellness" },
+  { id: "4", title: "Drink 2L Water", status: "done", category: "Health" },
   {
-    id: "3",
-    title: "Meditation",
-    status: "pending",
-    category: "Wellness",
+    id: "5",
+    title: "Write Journal",
+    status: "in_progress",
+    category: "Mindfulness",
+  },
+  { id: "6", title: "Study Coding", status: "pending", category: "Career" },
+  {
+    id: "7",
+    title: "Practice Guitar",
+    status: "in_progress",
+    category: "Hobby",
+  },
+  { id: "8", title: "No Sugar", status: "done", category: "Health" },
+  { id: "9", title: "Stretch 10 mins", status: "pending", category: "Fitness" },
+  { id: "10", title: "Sleep by 10PM", status: "done", category: "Wellness" },
+  {
+    id: "11",
+    title: "Read News Brief",
+    status: "in_progress",
+    category: "Knowledge",
+  },
+  {
+    id: "12",
+    title: "Gratitude List",
+    status: "done",
+    category: "Mindfulness",
   },
 ];
-
 export function HabitTable() {
   return (
     <div className="p-4 text-white">
