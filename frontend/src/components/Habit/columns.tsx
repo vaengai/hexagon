@@ -2,15 +2,31 @@
 
 import type { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
-import { IconCircleCheckFilled, IconLoader } from "@tabler/icons-react";
+import {
+  IconCircleCheckFilled,
+  IconLoader,
+  IconDotsVertical,
+} from "@tabler/icons-react";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { MoreHorizontal } from "lucide-react";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export type Habit = {
   id: string;
   title: string;
   status: "Pending" | "In Progress" | "Done";
   category: string;
+  progress: number;
+  goal: number;
 };
 
 export const columns: ColumnDef<Habit>[] = [
@@ -42,7 +58,7 @@ export const columns: ColumnDef<Habit>[] = [
       );
     },
     cell: ({ row }) => (
-      <Badge className="text-base text-muted-foreground px-4 border-neutral-700">
+      <Badge className="text-base text-muted-foreground px-4 bg-background">
         {row.original.status === "Done" ? (
           <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
         ) : (
@@ -65,5 +81,39 @@ export const columns: ColumnDef<Habit>[] = [
         </Button>
       );
     },
+  },
+  {
+    accessorKey: "progress",
+    header: "Progress",
+  },
+  {
+    accessorKey: "goal",
+    header: "Goal",
+  },
+
+  {
+    id: "actions",
+    header: "Actions",
+    cell: () => (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant="ghost"
+            className="data-[state=open]:bg-muted text-muted-foreground flex size-8 "
+            size="icon"
+          >
+            <IconDotsVertical />
+            <span className="sr-only">Open menu</span>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-32">
+          <DropdownMenuItem>Edit</DropdownMenuItem>
+          <DropdownMenuItem>Make a copy</DropdownMenuItem>
+          <DropdownMenuItem>Favorite</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    ),
   },
 ];

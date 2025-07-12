@@ -43,7 +43,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="max-w-8xl w-full mx-auto rounded-md border border-neutral-800">
+    <div className="max-w-8xl w-full mx-auto rounded-md border border-neutral-800 bg-background text-foreground">
       <Table className="text-sm">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -53,7 +53,7 @@ export function DataTable<TData, TValue>({
             >
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead className="text-neutral-400 py-4" key={header.id}>
+                  <TableHead className="text-neutral-400 py-2" key={header.id}>
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -72,7 +72,7 @@ export function DataTable<TData, TValue>({
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
-                className="border-b border-neutral-800 hover:bg-neutral-800"
+                className="border-b border-neutral-800 hover:bg-neutral-900"
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id} className="py-4">
