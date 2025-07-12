@@ -1,10 +1,6 @@
 import { PlusIcon } from "@heroicons/react/24/solid";
-import { AddHabit } from "./AddHabit.tsx";
-import { useState } from "react";
 
 export default function Hero() {
-  const [open, setOpen] = useState(false);
-
   return (
     <div className="relative isolate px-6 pt-14 lg:px-8">
       <div
@@ -62,7 +58,6 @@ export default function Hero() {
           className="overflow-x-hidden relative left-1/2 -translate-x-1/2 w-[90vw] max-w-[36rem] aspect-[1155/678] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
         />
       </div>
-      {/* <AddHabit open={open} setOpen={setOpen} /> */}
     </div>
   );
 }
