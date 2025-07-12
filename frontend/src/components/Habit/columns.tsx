@@ -3,25 +3,37 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
 import { IconCircleCheckFilled, IconLoader } from "@tabler/icons-react";
+import { ArrowUpDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export type Habit = {
   id: string;
   title: string;
-  status: "pending" | "in_progress" | "done";
+  status: "Pending" | "In Progress" | "Done";
   category: string;
 };
 
 export const columns: ColumnDef<Habit>[] = [
   {
     accessorKey: "title",
-    header: "Title",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Email
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => (
-      <Badge variant="outline" className="text-muted-foreground px-1.5">
-        {row.original.status === "done" ? (
+      <Badge className="text-base text-muted-foreground px-4 border-neutral-700">
+        {row.original.status === "Done" ? (
           <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
         ) : (
           <IconLoader />
