@@ -43,17 +43,14 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="max-w-8xl w-full mx-auto rounded-md border border-neutral-800 bg-background text-foreground">
-      <Table className="text-sm">
-        <TableHeader>
+    <div className="overflow-hidden rounded-lg border ">
+      <Table className="text-md">
+        <TableHeader className="bg-muted">
           {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow
-              key={headerGroup.id}
-              className="border-b border-neutral-800 hover:bg-transparent"
-            >
+            <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead className="text-neutral-400 py-2" key={header.id}>
+                  <TableHead className="py-2 px-4" key={header.id}>
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -72,19 +69,18 @@ export function DataTable<TData, TValue>({
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
-                className="border-b border-neutral-800 hover:bg-neutral-900"
               >
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id} className="py-4">
+                  <TableCell key={cell.id} className="py-4 px-4">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
               </TableRow>
             ))
           ) : (
-            <TableRow className=" border-neutral-800 hover:bg-neutral-800">
+            <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
+                There are no Habits!
               </TableCell>
             </TableRow>
           )}

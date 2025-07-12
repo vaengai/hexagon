@@ -116,8 +116,8 @@ const habitData: Habit[] = [
 ];
 export function HabitTable() {
   return (
-    <div className="px-4 sm:px-6 lg:px-8 text-white">
-      <h2 className="text-xl font-bold mb-4">My Habits</h2>
+    <div className="px-4 sm:px-6 lg:px-8 ">
+      <h2 className="text-xl mb-4">Habits</h2>
       <DataTable columns={columns} data={habitData} />
     </div>
   );

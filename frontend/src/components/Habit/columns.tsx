@@ -37,7 +37,7 @@ export const columns: ColumnDef<Habit>[] = [
     header: ({ column }) => {
       return (
         <Button
-          className="text-neutral-400 bg-transparent hover:bg-transparent"
+          className="bg-muted text-foreground hover:bg-background"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Habit
@@ -51,7 +51,7 @@ export const columns: ColumnDef<Habit>[] = [
     header: ({ column }) => {
       return (
         <Button
-          className="text-neutral-400 bg-transparent hover:bg-transparent"
+          className="bg-muted text-foreground hover:bg-background"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Status
@@ -60,7 +60,7 @@ export const columns: ColumnDef<Habit>[] = [
       );
     },
     cell: ({ row }) => (
-      <Badge className="text-base text-muted-foreground px-4 bg-background">
+      <Badge className="text-md text-muted-foreground px-2 bg-background outline-1">
         {row.original.status === "Done" ? (
           <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
         ) : (
@@ -75,7 +75,7 @@ export const columns: ColumnDef<Habit>[] = [
     header: ({ column }) => {
       return (
         <Button
-          className="text-neutral-400 bg-transparent hover:bg-transparent"
+          className="bg-muted text-foreground hover:bg-background"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Category
