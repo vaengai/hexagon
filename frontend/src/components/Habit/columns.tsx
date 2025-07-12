@@ -19,10 +19,10 @@ export const columns: ColumnDef<Habit>[] = [
     header: ({ column }) => {
       return (
         <Button
-          variant="ghost"
+          className="text-neutral-400 bg-transparent hover:bg-transparent"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Email
+          Habit
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );

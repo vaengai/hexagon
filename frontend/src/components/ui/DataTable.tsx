@@ -1,7 +1,11 @@
 "use client";
 
+import * as React from "react";
+
 import {
   type ColumnDef,
+  type SortingState,
+  getSortedRowModel,
   flexRender,
   getCoreRowModel,
   useReactTable,
@@ -25,20 +29,27 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      sorting,
+    },
   });
 
   return (
     <div className="max-w-8xl w-full mx-auto rounded-md border border-neutral-800">
-      <Table className="text-lg">
+      <Table className="text-sm">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow
               key={headerGroup.id}
-              className="border-b border-neutral-800 hover:bg-neutral-800"
+              className="border-b border-neutral-800 hover:bg-transparent"
             >
               {headerGroup.headers.map((header) => {
                 return (
