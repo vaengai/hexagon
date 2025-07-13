@@ -18,6 +18,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
+
 import { HABIT_CATEGORIES } from "@/constants/habitCategories";
 import type { HabitCategory } from "@/constants/habitCategories";
 
@@ -33,6 +35,7 @@ export function AddHabit({
   onClose: () => void;
 }) {
   const [selected, setSelected] = useState<HabitCategory | "">("");
+  const [goal, setGoal] = useState<number[]>([2]);
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -54,7 +57,7 @@ export function AddHabit({
                 required
               />
             </div>
-            <div className="grid gap-2">
+            <div className="grid gap-2 py-2">
               <Label htmlFor="habit-category">Category</Label>
               <Select
                 onValueChange={(value) => setSelected(value as HabitCategory)}
@@ -75,6 +78,26 @@ export function AddHabit({
               </Select>
             </div>
           </div>
+          <div className="grid gap-2 py-2">
+            <Label htmlFor="habit-goal">
+              Goal{" "}
+              {
+                <span className="text-sm text-muted-foreground ml-auto">
+                  {goal[0]}
+                </span>
+              }
+            </Label>
+
+            <Slider
+              id="habit-goal"
+              value={goal}
+              onValueChange={setGoal}
+              defaultValue={[2]}
+              max={7}
+              step={1}
+            />
+          </div>
+          <div className="border-t border-border my-6"></div>
           <DialogFooter className="gap-4">
             <DialogClose asChild>
               <Button type="button" variant="outline" className="px-4">
