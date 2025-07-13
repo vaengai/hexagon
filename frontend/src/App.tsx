@@ -15,7 +15,7 @@ export default function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Hero />} />
-          <Route path="/habits" element={<HabitTable />} />
+          <Route path="/habit" element={<HabitTable />} />
         </Routes>
       </div>
     </Router>
