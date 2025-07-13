@@ -8,8 +8,22 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { HABIT_CATEGORIES } from "@/constants/habitCategories";
+import type { HabitCategory } from "@/constants/habitCategories";
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useState } from "react";
 
 export function AddHabit({
   open,
@@ -18,6 +32,8 @@ export function AddHabit({
   open: boolean;
   onClose: () => void;
 }) {
+  const [selected, setSelected] = useState<HabitCategory | "">("");
+
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
@@ -27,13 +43,7 @@ export function AddHabit({
             Enter details for your new habit.
           </DialogDescription>
         </DialogHeader>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            // handle form submission here
-            onClose();
-          }}
-        >
+        <form>
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
               <Label htmlFor="habit-name">Habit Name</Label>
@@ -46,21 +56,34 @@ export function AddHabit({
             </div>
             <div className="grid gap-2">
               <Label htmlFor="habit-category">Category</Label>
-              <Input
-                id="habit-category"
-                name="category"
-                placeholder="e.g. Health"
-                required
-              />
+              <Select
+                onValueChange={(value) => setSelected(value as HabitCategory)}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select a category" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Categories</SelectLabel>
+                    {HABIT_CATEGORIES.map((category) => (
+                      <SelectItem key={category} value={category}>
+                        {category}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
             </div>
           </div>
-          <DialogFooter>
+          <DialogFooter className="gap-4">
             <DialogClose asChild>
-              <Button type="button" variant="outline">
+              <Button type="button" variant="outline" className="px-4">
                 Cancel
               </Button>
             </DialogClose>
-            <Button type="submit">Add Habit</Button>
+            <Button type="submit" className="px-4">
+              Add Habit
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>
