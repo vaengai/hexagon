@@ -37,7 +37,7 @@ export const columns: ColumnDef<Habit>[] = [
     header: ({ column }) => {
       return (
         <Button
-          className="bg-muted text-foreground hover:bg-background"
+          variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Habit
@@ -51,7 +51,7 @@ export const columns: ColumnDef<Habit>[] = [
     header: ({ column }) => {
       return (
         <Button
-          className="bg-muted text-foreground hover:bg-background"
+          variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Status
@@ -75,7 +75,7 @@ export const columns: ColumnDef<Habit>[] = [
     header: ({ column }) => {
       return (
         <Button
-          className="bg-muted text-foreground hover:bg-background"
+          variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Category
