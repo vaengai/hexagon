@@ -22,6 +22,8 @@ import { Slider } from "@/components/ui/slider";
 
 import { HABIT_CATEGORIES } from "@/constants/habitCategories";
 import type { HabitCategory } from "@/constants/habitCategories";
+import type { HabitFrequency } from "@/constants/habitFrequency";
+import { HABIT_FREQUENCY } from "@/constants/habitFrequency";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -67,7 +69,6 @@ export function AddHabit({
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    <SelectLabel>Categories</SelectLabel>
                     {HABIT_CATEGORIES.map((category) => (
                       <SelectItem key={category} value={category}>
                         {category}
@@ -79,6 +80,21 @@ export function AddHabit({
             </div>
           </div>
           <div className="grid gap-2 py-2">
+            <Label htmlFor="habit-frequency">Frequency</Label>
+            <Select>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a frequency"></SelectValue>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  {HABIT_FREQUENCY.map((frequency) => (
+                    <SelectItem key={frequency} value={frequency}>
+                      {frequency}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
             <Label htmlFor="habit-goal">
               Goal{" "}
               {
