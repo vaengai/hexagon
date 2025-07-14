@@ -201,7 +201,7 @@ export function DataTable<TData extends Habit, TValue>({
           </div>
         </TabsContent>
         <TabsContent value="card-view" className="relative overflow-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {data.map((habit) => (
               <Card
                 key={habit.id}
