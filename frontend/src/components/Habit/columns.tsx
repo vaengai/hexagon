@@ -21,15 +21,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Label } from "@headlessui/react";
 
-export type Habit = {
-  id: string;
-  title: string;
-  status: "Pending" | "In Progress" | "Done";
-  category: string;
-  progress: number;
-  goal: number;
-  active: boolean;
-};
+import type { Habit } from "@/types/habit";
 
 export const columns: ColumnDef<Habit>[] = [
   {

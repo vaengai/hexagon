@@ -15,11 +15,20 @@ import {
   IconPlus,
   IconChevronDown,
   IconLayoutColumns,
-  IconGrid4x4,
-  IconGridPatternFilled,
   IconLayoutGrid,
   IconLayoutList,
 } from "@tabler/icons-react";
+
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
 import { Label } from "@/components/ui/label";
 
 import {
@@ -39,22 +48,19 @@ import {
 
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { AddHabit } from "../Habit/AddHabit";
 
-interface DataTableProps<TData, TValue> {
+import type { Habit } from "@/types/habit";
+import { categoryColors } from "@/constants/categoryColors";
+import { statusColors } from "@/constants/statusColors";
+
+type DataTableProps<TData extends Habit, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-}
+};
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData extends Habit, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
@@ -73,6 +79,8 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  const colorClass = categoryColors[data.category] || categoryColors["Default"];
+
   return (
     <>
       {showAddHabit && (
@@ -82,11 +90,11 @@ export function DataTable<TData, TValue>({
         defaultValue="list-view"
         className="w-full flex-col justify-start gap-6"
       >
-        <div className="flex items-center justify-between px-4 lg:px-6">
+        <div className="flex items-center justify-between">
           <TabsList className="**:data-[slot=badge]:bg-muted-foreground/30 **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full **:data-[slot=badge]:px-1 @4xl/main:flex">
-            <TabsTrigger value="grid-view">
+            <TabsTrigger value="card-view">
               <IconLayoutGrid />
-              <span className="hidden lg:inline">Grid view</span>
+              <span className="hidden lg:inline">Card view</span>
             </TabsTrigger>
             <TabsTrigger value="list-view">
               <IconLayoutList />
@@ -139,7 +147,7 @@ export function DataTable<TData, TValue>({
         </div>
         <TabsContent
           value="list-view"
-          className="relative flex flex-col gap-4 overflow-auto px-4 lg:px-6"
+          className="relative flex flex-col gap-4 overflow-auto"
         >
           <div className="overflow-hidden rounded-lg border ">
             <Table className="text-md">
@@ -192,6 +200,57 @@ export function DataTable<TData, TValue>({
             </Table>
           </div>
         </TabsContent>
+        <TabsContent value="card-view" className="relative overflow-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+            {data.map((habit) => (
+              <Card
+                key={habit.id}
+                className="rounded-xl shadow-md border p-4 transition-transform hover:scale-[1.02]"
+              >
+                <CardHeader className="pb-2">
+                  <div className="mb-2">
+                    <span
+                      className={`inline-block ${statusColors[habit.status.toLowerCase()] || "bg-gray-500"} text-white text-xs font-semibold px-3 py-1 rounded`}
+                    >
+                      {habit.status.toUpperCase()}
+                    </span>
+                  </div>
+                  <CardTitle className="text-xl mt-2">{habit.title}</CardTitle>
+                  <CardDescription className="text-gray-500 text-sm">
+                    {habit.category}
+                  </CardDescription>
+                </CardHeader>
+
+                <CardContent className="text-sm">
+                  <div className="mt-2">
+                    <div className="flex justify-between text-sm text-muted-foreground mb-1">
+                      <span>Progress</span>
+                      <span>
+                        {Math.round((habit.progress / habit.goal) * 100)}%
+                      </span>
+                    </div>
+                    <div className="h-2 w-full bg-purple-100 overflow-hidden">
+                      <div
+                        className="h-full bg-green-600 transition-all duration-300"
+                        style={{
+                          width: `${(habit.progress / habit.goal) * 100}%`,
+                        }}
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+
+                <CardFooter>
+                  <p
+                    className={`text-xs font-semibold ${habit.active ? "text-green-600" : "text-red-500"}`}
+                  >
+                    {habit.active ? "Active" : "Inactive"}
+                  </p>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        </TabsContent>{" "}
       </Tabs>
     </>
   );
