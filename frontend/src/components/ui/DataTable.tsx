@@ -11,7 +11,16 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import { IconPlus } from "@tabler/icons-react";
+import {
+  IconPlus,
+  IconChevronDown,
+  IconLayoutColumns,
+  IconGrid4x4,
+  IconGridPatternFilled,
+  IconLayoutGrid,
+  IconLayoutList,
+} from "@tabler/icons-react";
+import { Label } from "@/components/ui/label";
 
 import {
   Table,
@@ -21,13 +30,22 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Tabs } from "@/components/ui/tabs";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuCheckboxItem,
 } from "@/components/ui/dropdown-menu";
+
+import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { AddHabit } from "../Habit/AddHabit";
 
@@ -61,20 +79,28 @@ export function DataTable<TData, TValue>({
         <AddHabit open={showAddHabit} onClose={() => setShowAddHabit(false)} />
       )}
       <Tabs
-        defaultValue="outline"
+        defaultValue="list-view"
         className="w-full flex-col justify-start gap-6"
       >
-        <div className="flex items-center">
+        <div className="flex items-center justify-between px-4 lg:px-6">
+          <TabsList className="**:data-[slot=badge]:bg-muted-foreground/30 **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full **:data-[slot=badge]:px-1 @4xl/main:flex">
+            <TabsTrigger value="grid-view">
+              <IconLayoutGrid />
+              <span className="hidden lg:inline">Grid view</span>
+            </TabsTrigger>
+            <TabsTrigger value="list-view">
+              <IconLayoutList />
+              <span className="hidden lg:inline">List view</span>
+            </TabsTrigger>
+          </TabsList>
           <div className="flex items-center gap-2 ml-auto">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm">
-                  {/* Replace with a valid icon or import IconLayoutColumns */}
-                  {/* <IconLayoutColumns /> */}
+                  <IconLayoutColumns />
                   <span className="hidden lg:inline">Customize Columns</span>
                   <span className="lg:hidden">Columns</span>
-                  {/* Replace with a valid icon or import IconChevronDown */}
-                  {/* <IconChevronDown /> */}
+                  <IconChevronDown />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="w-32">
@@ -111,57 +137,61 @@ export function DataTable<TData, TValue>({
             </Button>
           </div>
         </div>
-
-        <div className="overflow-hidden rounded-lg border ">
-          <Table className="text-md">
-            <TableHeader className="bg-muted">
-              {table.getHeaderGroups().map((headerGroup) => (
-                <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => {
-                    return (
-                      <TableHead className="py-2 px-4" key={header.id}>
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
-                      </TableHead>
-                    );
-                  })}
-                </TableRow>
-              ))}
-            </TableHeader>
-            <TableBody>
-              {table.getRowModel().rows?.length ? (
-                table.getRowModel().rows.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    data-state={row.getIsSelected() && "selected"}
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id} className="py-4 px-4">
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </TableCell>
-                    ))}
+        <TabsContent
+          value="list-view"
+          className="relative flex flex-col gap-4 overflow-auto px-4 lg:px-6"
+        >
+          <div className="overflow-hidden rounded-lg border ">
+            <Table className="text-md">
+              <TableHeader className="bg-muted">
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <TableRow key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => {
+                      return (
+                        <TableHead className="py-2 px-4" key={header.id}>
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                        </TableHead>
+                      );
+                    })}
                   </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell
-                    colSpan={columns.length}
-                    className="h-24 text-center"
-                  >
-                    There are no Habits!
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </div>
+                ))}
+              </TableHeader>
+              <TableBody>
+                {table.getRowModel().rows?.length ? (
+                  table.getRowModel().rows.map((row) => (
+                    <TableRow
+                      key={row.id}
+                      data-state={row.getIsSelected() && "selected"}
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id} className="py-4 px-4">
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell
+                      colSpan={columns.length}
+                      className="h-24 text-center"
+                    >
+                      There are no Habits!
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </div>
+        </TabsContent>
       </Tabs>
     </>
   );
