@@ -45,7 +45,7 @@ import {
   DropdownMenuContent,
   DropdownMenuCheckboxItem,
 } from "@/components/ui/dropdown-menu";
-
+import Action from "../Habit/Action";
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
 
 import { Button } from "@/components/ui/button";
@@ -145,11 +145,8 @@ export function DataTable<TData extends Habit, TValue>({
             </Button>
           </div>
         </div>
-        <TabsContent
-          value="list-view"
-          className="relative flex flex-col gap-4 overflow-auto"
-        >
-          <div className="overflow-hidden rounded-lg border ">
+        <TabsContent value="list-view" className="relative flex flex-col gap-4">
+          <div className=" rounded-lg border ">
             <Table className="text-md">
               <TableHeader className="bg-muted">
                 {table.getHeaderGroups().map((headerGroup) => (
@@ -200,7 +197,7 @@ export function DataTable<TData extends Habit, TValue>({
             </Table>
           </div>
         </TabsContent>
-        <TabsContent value="card-view" className="relative overflow-auto">
+        <TabsContent value="card-view" className="relative">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {data.map((habit) => (
               <Card
@@ -208,12 +205,15 @@ export function DataTable<TData extends Habit, TValue>({
                 className="rounded-xl shadow-md border p-4 transition-transform hover:scale-[1.02]"
               >
                 <CardHeader className="pb-2">
-                  <div className="mb-2">
+                  <div className="mb-2 flex items-center">
                     <span
                       className={`inline-block ${statusColors[habit.status.toLowerCase()] || "bg-gray-500"} text-white text-xs font-semibold px-3 py-1 rounded`}
                     >
                       {habit.status.toUpperCase()}
                     </span>
+                    <div className="ml-2 ml-auto">
+                      <Action />
+                    </div>
                   </div>
                   <CardTitle className="text-xl mt-2">{habit.title}</CardTitle>
                   <CardDescription className="text-gray-500 text-sm">
@@ -229,7 +229,7 @@ export function DataTable<TData extends Habit, TValue>({
                         {Math.round((habit.progress / habit.goal) * 100)}%
                       </span>
                     </div>
-                    <div className="h-2 w-full bg-purple-100 overflow-hidden">
+                    <div className="h-2 w-full bg-purple-100">
                       <div
                         className="h-full bg-green-600 transition-all duration-300"
                         style={{
