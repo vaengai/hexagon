@@ -8,7 +8,7 @@ const habitData: Habit[] = [
   {
     id: "1",
     title: "Morning Run",
-    status: "In Progress",
+    status: "Pending",
     category: "Health",
     progress: 3,
     goal: 7,
@@ -44,7 +44,7 @@ const habitData: Habit[] = [
   {
     id: "5",
     title: "Write Journal",
-    status: "In Progress",
+    status: "Pending",
     category: "Mindfulness",
     progress: 4,
     goal: 7,
@@ -62,7 +62,7 @@ const habitData: Habit[] = [
   {
     id: "7",
     title: "Practice Guitar",
-    status: "In Progress",
+    status: "Pending",
     category: "Hobby",
     progress: 2,
     goal: 5,
@@ -98,7 +98,7 @@ const habitData: Habit[] = [
   {
     id: "11",
     title: "Read News Brief",
-    status: "In Progress",
+    status: "Pending",
     category: "Knowledge",
     progress: 3,
     goal: 7,

@@ -54,6 +54,7 @@ import { AddHabit } from "../Habit/AddHabit";
 import type { Habit } from "@/types/habit";
 import { categoryColors } from "@/constants/categoryColors";
 import { statusColors } from "@/constants/statusColors";
+import StatusButton from "../Habit/StatusButton";
 
 type DataTableProps<TData extends Habit, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -206,11 +207,10 @@ export function DataTable<TData extends Habit, TValue>({
               >
                 <CardHeader className="pb-2">
                   <div className="mb-2 flex items-center">
-                    <span
-                      className={`inline-block ${statusColors[habit.status.toLowerCase()] || "bg-gray-500"} text-white text-xs font-semibold px-3 py-1 rounded`}
-                    >
-                      {habit.status.toUpperCase()}
-                    </span>
+                    <StatusButton
+                      initialStatus={habit.status.toUpperCase()}
+                    ></StatusButton>
+
                     <div className="ml-2 ml-auto">
                       <Action />
                     </div>
