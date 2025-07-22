@@ -16,7 +16,7 @@ export default function StatusButton({
   return (
     <Button
       onClick={() => handleClick()}
-      className={`inline-block ${statusColors[status.toLowerCase()] || "bg-gray-500"} text-white text-xs font-semibold px-3 py-1 rounded`}
+      className={`inline-block ${statusColors[status.toLowerCase()] || "bg-gray-500"} text-white text-xs font-semibold px-3 py-1 rounded cursor-pointer`}
     >
       {status}
     </Button>
