@@ -71,8 +71,6 @@ export function DataTable({
 }: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
-  // const [showAddHabit, setShowAddHabit] = React.useState(false);
-
   const table = useReactTable({
     data,
     columns,
@@ -214,6 +212,7 @@ export function DataTable({
                 <CardHeader className="pb-2">
                   <div className="mb-2 flex items-center">
                     <StatusButton
+                      habitTitle={habit.title}
                       initialStatus={habit.status.toUpperCase()}
                     ></StatusButton>
 

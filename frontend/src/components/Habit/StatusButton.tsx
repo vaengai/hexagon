@@ -1,16 +1,31 @@
 import { Button } from "@headlessui/react";
 import { useState } from "react";
 import { statusColors } from "@/constants/statusColors";
+import axios from "axios";
+
+async function updateStatusApi(
+  habitTitle: string,
+  status: string
+): Promise<string> {
+  const response = await axios.patch(
+    `http://localhost:8000/habit/${encodeURIComponent(habitTitle)}/status/${encodeURIComponent(status)}`
+  );
+  return response.data;
+}
 
 export default function StatusButton({
+  habitTitle,
   initialStatus,
 }: {
+  habitTitle: string;
   initialStatus: string;
 }) {
   const [status, setStatus] = useState(initialStatus);
 
   const handleClick = () => {
-    setStatus((prev) => (prev === "PENDING" ? "DONE" : "PENDING"));
+    const newStatus = status === "PENDING" ? "DONE" : "PENDING";
+    setStatus(newStatus);
+    updateStatusApi(habitTitle, newStatus);
   };
 
   return (

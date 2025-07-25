@@ -1,0 +1,11 @@
+meta {
+  name: Update Habit Status
+  type: http
+  seq: 8
+}
+
+patch {
+  url: {{hexagon_base_url}}/habit/adas/status/DONE
+  body: none
+  auth: inherit
+}
