@@ -39,7 +39,7 @@ export function AddHabit({
   onSubmit: (habit: Omit<Habit, "id">) => void;
 }) {
   const [selected, setSelected] = useState<HabitCategory | "">("");
-  const [goal, setGoal] = useState<number[]>([2]);
+  const [goal, setGoal] = useState<number>(1);
   const [frequency, setFrequency] = useState<HabitFrequency | "">("");
   const [name, setName] = useState("");
 
@@ -52,7 +52,7 @@ export function AddHabit({
       category: selected,
       status: PENDING_STATUS,
       progress: 0,
-      goal: goal[0],
+      goal: goal,
       active: true,
       frequency,
     };
@@ -103,41 +103,44 @@ export function AddHabit({
             </div>
           </div>
           <div className="grid gap-2 py-2">
-            <Label htmlFor="habit-frequency">Frequency</Label>
-            <Select
-              onValueChange={(value) => setFrequency(value as HabitFrequency)}
-            >
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select a frequency"></SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  {HABIT_FREQUENCY.map((frequency) => (
-                    <SelectItem key={frequency} value={frequency}>
-                      {frequency}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-            <Label htmlFor="habit-goal">
-              Goal{" "}
-              {
-                <span className="text-sm text-muted-foreground ml-auto">
-                  {goal[0]}
-                </span>
-              }
-            </Label>
-
-            <Slider
-              id="habit-goal"
-              value={goal}
-              onValueChange={setGoal}
-              defaultValue={[2]}
-              max={7}
-              step={1}
-            />
+            <div>
+              <Label htmlFor="habit-target">Target</Label>
+              <div className="flex items-center gap-2 mb-2 my-4">
+                <Input
+                  id="habit-times"
+                  name="times"
+                  type="number"
+                  min={1}
+                  className="w-24 appearance-none"
+                  placeholder="1"
+                  required
+                  value={goal}
+                  onChange={(e) => setGoal(Number(e.target.value))}
+                />
+                <span className="mx-1">times per</span>
+                <Select
+                  value={frequency}
+                  onValueChange={(value) =>
+                    setFrequency(value as HabitFrequency)
+                  }
+                >
+                  <SelectTrigger className="flex-1 min-w-0">
+                    <SelectValue placeholder="Frequency" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {HABIT_FREQUENCY.map((frequency) => (
+                        <SelectItem key={frequency} value={frequency}>
+                          {frequency}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
           </div>
+
           <div className="border-t border-border my-6"></div>
           <DialogFooter className="gap-4">
             <DialogClose asChild>
