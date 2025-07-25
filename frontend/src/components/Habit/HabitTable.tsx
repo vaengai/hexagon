@@ -8,7 +8,8 @@ import axios from "axios";
 
 async function addHabitApi(newHabit: Omit<Habit, "id">): Promise<Habit> {
   console.log(newHabit);
-  const response = await axios.post("http://localhost:8000/habit", newHabit);
+  const url = `${import.meta.env.VITE_HEXAGON_API_BASE_URL}/habit`;
+  const response = await axios.post(url, newHabit);
   return response.data;
 }
 
@@ -17,8 +18,9 @@ export function HabitTable() {
   const [showAddHabit, setShowAddHabit] = useState(false);
 
   useEffect(() => {
+    const url = `${import.meta.env.VITE_HEXAGON_API_BASE_URL}/habit`;
     axios
-      .get("http://localhost:8000/habit")
+      .get(url)
       .then((response) => {
         setHabits(response.data);
       })
