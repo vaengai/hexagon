@@ -4,11 +4,10 @@ import type { ColumnDef } from "@tanstack/react-table";
 
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
 import StatusButton from "./StatusButton";
 import type { Habit } from "@/types/habit";
 import Action from "./Action";
-
+import ToggleActive from "./ToggleActive";
 export const baseColumns = (
   onDeleteHabit: (id: string) => void
 ): ColumnDef<Habit>[] => [
@@ -72,7 +71,8 @@ export const baseColumns = (
     accessorKey: "active",
     header: "Active",
     cell: ({ row }) => (
-      <Switch id="active-status-ind" defaultChecked={row.original.active} />
+      // <Switch id="active-status-ind" defaultChecked={row.original.active} />
+      <ToggleActive habitId={row.original.id} />
     ),
   },
   {
