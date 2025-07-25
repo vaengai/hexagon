@@ -6,9 +6,10 @@ import { IconCircleCheckFilled, IconLoader } from "@tabler/icons-react";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
-
+import StatusButton from "./StatusButton";
 import type { Habit } from "@/types/habit";
 import Action from "./Action";
+
 export const columns: ColumnDef<Habit>[] = [
   {
     accessorKey: "title",
@@ -38,14 +39,10 @@ export const columns: ColumnDef<Habit>[] = [
       );
     },
     cell: ({ row }) => (
-      <Badge className="text-md text-muted-foreground px-2 bg-background outline-1">
-        {row.original.status === "DONE" ? (
-          <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
-        ) : (
-          <IconLoader />
-        )}
-        {row.original.status}
-      </Badge>
+      <StatusButton
+        habitTitle={row.original.title}
+        initialStatus={row.original.status}
+      />
     ),
   },
   {
