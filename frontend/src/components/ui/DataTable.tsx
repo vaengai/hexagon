@@ -52,13 +52,14 @@ import { Button } from "@/components/ui/button";
 import { AddHabit } from "../Habit/AddHabit";
 
 import type { Habit } from "@/types/habit";
-import { categoryColors } from "@/constants/categoryColors";
-import { statusColors } from "@/constants/statusColors";
 import StatusButton from "../Habit/StatusButton";
 
 type DataTableProps = {
   columns: ColumnDef<Habit, unknown>[];
   data: Habit[];
+  showAddHabit: boolean;
+  setShowAddHabit: (show: boolean) => void;
+  onAddHabit: (habit: Habit) => void;
 };
 
 export function DataTable({
