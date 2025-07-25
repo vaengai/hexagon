@@ -1,8 +1,7 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
-import { Badge } from "@/components/ui/badge";
-import { IconCircleCheckFilled, IconLoader } from "@tabler/icons-react";
+
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -72,7 +71,9 @@ export const baseColumns = (
   {
     accessorKey: "active",
     header: "Active",
-    cell: () => <Switch id="active-status-ind" />,
+    cell: ({ row }) => (
+      <Switch id="active-status-ind" defaultChecked={row.original.active} />
+    ),
   },
   {
     id: "actions",
