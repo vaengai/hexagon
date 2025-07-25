@@ -56,18 +56,21 @@ import { categoryColors } from "@/constants/categoryColors";
 import { statusColors } from "@/constants/statusColors";
 import StatusButton from "../Habit/StatusButton";
 
-type DataTableProps<TData extends Habit, TValue> = {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+type DataTableProps = {
+  columns: ColumnDef<Habit, unknown>[];
+  data: Habit[];
 };
 
-export function DataTable<TData extends Habit, TValue>({
+export function DataTable({
   columns,
   data,
-}: DataTableProps<TData, TValue>) {
+  showAddHabit,
+  setShowAddHabit,
+  onAddHabit,
+}: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
-  const [showAddHabit, setShowAddHabit] = React.useState(false);
+  // const [showAddHabit, setShowAddHabit] = React.useState(false);
 
   const table = useReactTable({
     data,
@@ -80,12 +83,14 @@ export function DataTable<TData extends Habit, TValue>({
     },
   });
 
-  const colorClass = categoryColors[data.category] || categoryColors["Default"];
-
   return (
     <>
       {showAddHabit && (
-        <AddHabit open={showAddHabit} onClose={() => setShowAddHabit(false)} />
+        <AddHabit
+          open={showAddHabit}
+          onClose={() => setShowAddHabit(false)}
+          onSubmit={onAddHabit}
+        />
       )}
       <Tabs
         defaultValue="list-view"

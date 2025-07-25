@@ -1,7 +1,7 @@
 export interface Habit {
   id: string;
   title: string;
-  status: "Pending" | "In Progress" | "Done";
+  status: "PENDING" | "DONE";
   category: string;
   progress: number;
   goal: number;

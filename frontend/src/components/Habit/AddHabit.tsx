@@ -24,6 +24,7 @@ import { HABIT_CATEGORIES } from "@/constants/habitCategories";
 import type { HabitCategory } from "@/constants/habitCategories";
 import type { HabitFrequency } from "@/constants/habitFrequency";
 import { HABIT_FREQUENCY } from "@/constants/habitFrequency";
+import type { Habit } from "@/types/habit";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -32,12 +33,33 @@ import { useState } from "react";
 export function AddHabit({
   open,
   onClose,
+  onSubmit,
 }: {
   open: boolean;
   onClose: () => void;
+  onSubmit: (habit: Omit<Habit, "id">) => void;
 }) {
   const [selected, setSelected] = useState<HabitCategory | "">("");
   const [goal, setGoal] = useState<number[]>([2]);
+  const [frequency, setFrequency] = useState<HabitFrequency | "">("");
+  const [name, setName] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !selected || !frequency) return;
+    const PENDING_STATUS = "PENDING" as const;
+    const payload = {
+      title: name,
+      category: selected,
+      status: PENDING_STATUS,
+      progress: 0,
+      goal: goal[0],
+      active: true,
+      frequency,
+    };
+    console.log("Submitting habit payload:", payload);
+    onSubmit(payload);
+  };
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -48,7 +70,7 @@ export function AddHabit({
             Enter details for your new habit.
           </DialogDescription>
         </DialogHeader>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
               <Label htmlFor="habit-name">Habit Name</Label>
@@ -57,6 +79,8 @@ export function AddHabit({
                 name="name"
                 placeholder="e.g. Drink Water"
                 required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div className="grid gap-2 py-2">
@@ -81,7 +105,9 @@ export function AddHabit({
           </div>
           <div className="grid gap-2 py-2">
             <Label htmlFor="habit-frequency">Frequency</Label>
-            <Select>
+            <Select
+              onValueChange={(value) => setFrequency(value as HabitFrequency)}
+            >
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select a frequency"></SelectValue>
               </SelectTrigger>
