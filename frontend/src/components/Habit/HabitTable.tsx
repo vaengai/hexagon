@@ -1,8 +1,10 @@
 "use client";
 
 import { columns } from "./columns";
-import type { Habit } from "./columns";
 import { DataTable } from "../ui/DataTable";
+import type { Habit } from "@/types/habit";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const habitData: Habit[] = [
   {
@@ -115,9 +117,21 @@ const habitData: Habit[] = [
   },
 ];
 export function HabitTable() {
+  const [habits, setHabits] = useState<Habit[]>([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/habit")
+      .then((response) => {
+        setHabits(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
   return (
     <div className="px-4 sm:px-6 lg:px-8">
-      <DataTable columns={columns} data={habitData} />
+      <DataTable columns={columns} data={habits} />
     </div>
   );
 }
