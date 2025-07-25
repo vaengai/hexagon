@@ -50,6 +50,7 @@ import { AddHabit } from "../Habit/AddHabit";
 
 import type { Habit } from "@/types/habit";
 import StatusButton from "../Habit/StatusButton";
+import ToggleActive from "../Habit/ToggleActive";
 
 type DataTableProps = {
   columns: ColumnDef<Habit, unknown>[];
@@ -58,6 +59,7 @@ type DataTableProps = {
   setShowAddHabit: (show: boolean) => void;
   onAddHabit: (habit: Omit<Habit, "id">) => void;
   onDeleteHabit: (id: string) => void;
+  refetchHabits: () => void;
 };
 
 export function DataTable({
@@ -67,6 +69,7 @@ export function DataTable({
   setShowAddHabit,
   onAddHabit,
   onDeleteHabit,
+  refetchHabits,
 }: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
@@ -213,9 +216,15 @@ export function DataTable({
                     <StatusButton
                       habitTitle={habit.title}
                       initialStatus={habit.status.toUpperCase()}
+                      refetchHabits={refetchHabits}
                     ></StatusButton>
 
-                    <div className="ml-2 ml-auto">
+                    <div className="ml-auto flex items-center gap-2">
+                      <ToggleActive
+                        habitId={habit.id}
+                        currentState={habit.active}
+                        refetchHabits={refetchHabits}
+                      />
                       <Action habitId={habit.id} onDelete={onDeleteHabit} />
                     </div>
                   </div>

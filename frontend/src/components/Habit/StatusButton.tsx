@@ -10,22 +10,26 @@ async function updateStatusApi(
   const url = `${import.meta.env.VITE_HEXAGON_API_BASE_URL}/habit/${encodeURIComponent(habitTitle)}/status/${encodeURIComponent(status)}`;
 
   const response = await axios.patch(url);
-  return response.data;
+  console.log("response from updateStatusApi", response.data);
+  return response.data.status;
 }
 
 export default function StatusButton({
   habitTitle,
   initialStatus,
+  refetchHabits,
 }: {
   habitTitle: string;
   initialStatus: string;
+  refetchHabits: () => void;
 }) {
   const [status, setStatus] = useState(initialStatus);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     const newStatus = status === "PENDING" ? "DONE" : "PENDING";
     setStatus(newStatus);
-    updateStatusApi(habitTitle, newStatus);
+    await updateStatusApi(habitTitle, newStatus);
+    refetchHabits();
   };
 
   return (

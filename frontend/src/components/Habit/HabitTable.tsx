@@ -17,16 +17,16 @@ export function HabitTable() {
   const [habits, setHabits] = useState<Habit[]>([]);
   const [showAddHabit, setShowAddHabit] = useState(false);
 
-  useEffect(() => {
+  const fetchHabits = () => {
     const url = `${import.meta.env.VITE_HEXAGON_API_BASE_URL}/habit`;
     axios
       .get(url)
-      .then((response) => {
-        setHabits(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
+      .then((response) => setHabits(response.data))
+      .catch((error) => console.error("Error fetching data:", error));
+  };
+
+  useEffect(() => {
+    fetchHabits();
   }, []);
 
   const handleAddHabit = async (habitData: Omit<Habit, "id">) => {
@@ -39,7 +39,7 @@ export function HabitTable() {
     setHabits((prev) => prev.filter((habit) => habit.id !== id));
   };
 
-  const columns = baseColumns(handleDeleteHabit);
+  const columns = baseColumns(handleDeleteHabit, fetchHabits);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -50,6 +50,7 @@ export function HabitTable() {
         setShowAddHabit={setShowAddHabit}
         onAddHabit={handleAddHabit}
         onDeleteHabit={handleDeleteHabit}
+        refetchHabits={fetchHabits}
       />
     </div>
   );

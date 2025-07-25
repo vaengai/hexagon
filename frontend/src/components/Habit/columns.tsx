@@ -9,7 +9,8 @@ import type { Habit } from "@/types/habit";
 import Action from "./Action";
 import ToggleActive from "./ToggleActive";
 export const baseColumns = (
-  onDeleteHabit: (id: string) => void
+  onDeleteHabit: (id: string) => void,
+  refetchHabits: () => void
 ): ColumnDef<Habit>[] => [
   {
     accessorKey: "title",
@@ -42,6 +43,7 @@ export const baseColumns = (
       <StatusButton
         habitTitle={row.original.title}
         initialStatus={row.original.status}
+        refetchHabits={refetchHabits}
       />
     ),
   },
@@ -72,7 +74,11 @@ export const baseColumns = (
     header: "Active",
     cell: ({ row }) => (
       // <Switch id="active-status-ind" defaultChecked={row.original.active} />
-      <ToggleActive habitId={row.original.id} />
+      <ToggleActive
+        habitId={row.original.id}
+        currentState={row.original.active}
+        refetchHabits={refetchHabits}
+      />
     ),
   },
   {
