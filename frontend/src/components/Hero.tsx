@@ -1,6 +1,9 @@
 import { PlusIcon } from "@heroicons/react/24/solid";
+import { useNavigate } from "react-router-dom";
 
 export default function Hero() {
+  const navigate = useNavigate();
+
   return (
     <div className="relative isolate px-6 pt-14 lg:px-8">
       <div
@@ -29,7 +32,7 @@ export default function Hero() {
           {/* Centered Card for Add Habit */}
           <div className="flex justify-center mt-10">
             <button
-              onClick={() => console.log("Button clicked")}
+              onClick={() => navigate("/habit")}
               className="rounded-md shadow-2xs hover:shadow-lg cursor-pointer p-8 flex flex-col items-center w-sm border-sky-400 shadow-sky-200 border-2"
               type="button"
             >
