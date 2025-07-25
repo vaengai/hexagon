@@ -57,6 +57,7 @@ type DataTableProps = {
   showAddHabit: boolean;
   setShowAddHabit: (show: boolean) => void;
   onAddHabit: (habit: Omit<Habit, "id">) => void;
+  onDeleteHabit: (id: string) => void;
 };
 
 export function DataTable({
@@ -65,6 +66,7 @@ export function DataTable({
   showAddHabit,
   setShowAddHabit,
   onAddHabit,
+  onDeleteHabit,
 }: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
@@ -214,7 +216,7 @@ export function DataTable({
                     ></StatusButton>
 
                     <div className="ml-2 ml-auto">
-                      <Action />
+                      <Action habitId={habit.id} onDelete={onDeleteHabit} />
                     </div>
                   </div>
                   <CardTitle className="text-xl mt-2">{habit.title}</CardTitle>

@@ -10,7 +10,9 @@ import StatusButton from "./StatusButton";
 import type { Habit } from "@/types/habit";
 import Action from "./Action";
 
-export const columns: ColumnDef<Habit>[] = [
+export const baseColumns = (
+  onDeleteHabit: (id: string) => void
+): ColumnDef<Habit>[] => [
   {
     accessorKey: "title",
     header: ({ column }) => {
@@ -75,6 +77,8 @@ export const columns: ColumnDef<Habit>[] = [
   {
     id: "actions",
     header: "Actions",
-    cell: () => <Action />,
+    cell: ({ row }) => (
+      <Action habitId={row.original.id} onDelete={onDeleteHabit} />
+    ),
   },
 ];

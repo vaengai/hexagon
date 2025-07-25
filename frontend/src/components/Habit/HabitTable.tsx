@@ -1,6 +1,6 @@
 "use client";
 
-import { columns } from "./columns";
+import { baseColumns } from "./columns";
 import { DataTable } from "../ui/DataTable";
 import type { Habit } from "@/types/habit";
 import { useEffect, useState } from "react";
@@ -34,6 +34,13 @@ export function HabitTable() {
     setHabits((prev) => [...prev, created]);
     setShowAddHabit(false);
   };
+
+  const handleDeleteHabit = (id: string) => {
+    setHabits((prev) => prev.filter((habit) => habit.id !== id));
+  };
+
+  const columns = baseColumns(handleDeleteHabit);
+
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <DataTable
@@ -42,6 +49,7 @@ export function HabitTable() {
         showAddHabit={showAddHabit}
         setShowAddHabit={setShowAddHabit}
         onAddHabit={handleAddHabit}
+        onDeleteHabit={handleDeleteHabit}
       />
     </div>
   );

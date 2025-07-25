@@ -7,8 +7,26 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { IconDotsVertical } from "@tabler/icons-react";
+import axios from "axios";
 
-export default function Action() {
+async function deleteHabitApi(id: string) {
+  const url = `${import.meta.env.VITE_HEXAGON_API_BASE_URL}/habit/${encodeURIComponent(id)}`;
+
+  const response = await axios.delete(url);
+  return response.data;
+}
+
+export default function Action({
+  habitId,
+  onDelete = () => {},
+}: {
+  habitId: string;
+  onDelete: (id: string) => void;
+}) {
+  const handleDelete = async () => {
+    await deleteHabitApi(habitId);
+    onDelete(habitId);
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -26,7 +44,9 @@ export default function Action() {
         <DropdownMenuItem>Make a copy</DropdownMenuItem>
         <DropdownMenuItem>Favorite</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+        <DropdownMenuItem variant="destructive" onSelect={handleDelete}>
+          Delete
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
