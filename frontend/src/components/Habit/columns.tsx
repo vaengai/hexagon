@@ -2,24 +2,10 @@
 
 import type { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
-import {
-  IconCircleCheckFilled,
-  IconLoader,
-  IconDotsVertical,
-} from "@tabler/icons-react";
+import { IconCircleCheckFilled, IconLoader } from "@tabler/icons-react";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Label } from "@headlessui/react";
 
 import type { Habit } from "@/types/habit";
 import Action from "./Action";
@@ -53,7 +39,7 @@ export const columns: ColumnDef<Habit>[] = [
     },
     cell: ({ row }) => (
       <Badge className="text-md text-muted-foreground px-2 bg-background outline-1">
-        {row.original.status === "Done" ? (
+        {row.original.status === "DONE" ? (
           <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
         ) : (
           <IconLoader />

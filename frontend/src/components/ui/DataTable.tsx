@@ -21,15 +21,12 @@ import {
 
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
-import { Label } from "@/components/ui/label";
 
 import {
   Table,
@@ -59,7 +56,7 @@ type DataTableProps = {
   data: Habit[];
   showAddHabit: boolean;
   setShowAddHabit: (show: boolean) => void;
-  onAddHabit: (habit: Habit) => void;
+  onAddHabit: (habit: Omit<Habit, "id">) => void;
 };
 
 export function DataTable({
