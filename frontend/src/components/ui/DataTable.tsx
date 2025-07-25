@@ -175,21 +175,32 @@ export function DataTable({
               </TableHeader>
               <TableBody>
                 {table.getRowModel().rows?.length ? (
-                  table.getRowModel().rows.map((row) => (
-                    <TableRow
-                      key={row.id}
-                      data-state={row.getIsSelected() && "selected"}
-                    >
-                      {row.getVisibleCells().map((cell) => (
-                        <TableCell key={cell.id} className="py-4 px-4">
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  ))
+                  table.getRowModel().rows.map((row) => {
+                    // Assume "active" is a property on the original data object
+                    const isActive = (row.original as Habit).active;
+                    return (
+                      <TableRow
+                        key={row.id}
+                        data-state={row.getIsSelected() && "selected"}
+                        className={
+                          !isActive
+                            ? "bg-muted cursor-not-allowed opacity-30"
+                            : ""
+                        }
+                        tabIndex={isActive ? 0 : -1}
+                        aria-disabled={!isActive}
+                      >
+                        {row.getVisibleCells().map((cell) => (
+                          <TableCell key={cell.id} className="py-4 px-4">
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    );
+                  })
                 ) : (
                   <TableRow>
                     <TableCell
@@ -209,15 +220,20 @@ export function DataTable({
             {data.map((habit) => (
               <Card
                 key={habit.id}
-                className="rounded-xl shadow-md border p-4 transition-transform hover:scale-[1.02]"
+                className={`rounded-xl shadow-md border p-4 transition-transform hover:scale-[1.02] ${
+                  !habit.active ? "bg-muted cursor-not-allowed opacity-30" : ""
+                }`}
+                tabIndex={habit.active ? 0 : -1}
+                aria-disabled={!habit.active}
               >
                 <CardHeader className="pb-2">
                   <div className="mb-2 flex items-center">
                     <StatusButton
-                      habitTitle={habit.title}
+                      id={habit.id}
                       initialStatus={habit.status.toUpperCase()}
                       refetchHabits={refetchHabits}
-                    ></StatusButton>
+                      disabled={habit.active}
+                    />
 
                     <div className="ml-auto flex items-center gap-2">
                       <ToggleActive

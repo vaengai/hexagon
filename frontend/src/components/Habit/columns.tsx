@@ -41,9 +41,10 @@ export const baseColumns = (
     },
     cell: ({ row }) => (
       <StatusButton
-        habitTitle={row.original.title}
+        id={row.original.id}
         initialStatus={row.original.status}
         refetchHabits={refetchHabits}
+        disabled={row.original.active}
       />
     ),
   },
