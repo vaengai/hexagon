@@ -262,7 +262,7 @@ export function DataTable({
                       <div
                         className="h-full bg-green-600 transition-all duration-300"
                         style={{
-                          width: `${(habit.progress / habit.target) * 100}%`,
+                          width: `${Math.min(100, Math.round((habit.progress / habit.target) * 100))}%`,
                         }}
                       />
                     </div>
