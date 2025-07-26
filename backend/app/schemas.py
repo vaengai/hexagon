@@ -3,16 +3,18 @@ from datetime import datetime
 
 from enum import Enum
 
+
 class HabitStatus(str, Enum):
     pending = "PENDING"
     done = "DONE"
+
 
 class HabitBase(BaseModel):
     title: constr(min_length=1, max_length=100)
     status: HabitStatus
     category: constr(min_length=1, max_length=100)
     progress: conint(gt=0)
-    goal: conint(gt=0)
+    target: conint(gt=0)
     active: bool
 
     @root_validator(pre=True)

@@ -67,8 +67,12 @@ export const baseColumns = (
     header: "Progress",
   },
   {
-    accessorKey: "goal",
-    header: "Goal",
+    accessorKey: "target",
+    header: "Target",
+  },
+  {
+    accessorKey: "frequency",
+    header: "Frequency",
   },
   {
     accessorKey: "active",

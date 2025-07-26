@@ -17,7 +17,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
 
 import { HABIT_CATEGORIES } from "@/constants/habitCategories";
 import type { HabitCategory } from "@/constants/habitCategories";
@@ -39,7 +38,7 @@ export function AddHabit({
   onSubmit: (habit: Omit<Habit, "id">) => void;
 }) {
   const [selected, setSelected] = useState<HabitCategory | "">("");
-  const [goal, setGoal] = useState<number>(1);
+  const [target, setTarget] = useState<number>(1);
   const [frequency, setFrequency] = useState<HabitFrequency | "">("");
   const [name, setName] = useState("");
 
@@ -47,14 +46,15 @@ export function AddHabit({
     e.preventDefault();
     if (!name || !selected || !frequency) return;
     const PENDING_STATUS = "PENDING" as const;
+
     const payload = {
       title: name,
       category: selected,
       status: PENDING_STATUS,
       progress: 0,
-      goal: goal,
+      target: target,
       active: true,
-      frequency,
+      frequency: frequency,
     };
     console.log("Submitting habit payload:", payload);
     onSubmit(payload);
@@ -108,14 +108,14 @@ export function AddHabit({
               <div className="flex items-center gap-2 mb-2 my-4">
                 <Input
                   id="habit-times"
-                  name="times"
+                  name="target"
                   type="number"
                   min={1}
                   className="w-24 appearance-none"
                   placeholder="1"
                   required
-                  value={goal}
-                  onChange={(e) => setGoal(Number(e.target.value))}
+                  value={target}
+                  onChange={(e) => setTarget(Number(e.target.value))}
                 />
                 <span className="mx-1">times per</span>
                 <Select

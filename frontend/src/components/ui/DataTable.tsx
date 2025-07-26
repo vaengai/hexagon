@@ -255,14 +255,14 @@ export function DataTable({
                     <div className="flex justify-between text-sm text-muted-foreground mb-1">
                       <span>Progress</span>
                       <span>
-                        {Math.round((habit.progress / habit.goal) * 100)}%
+                        {Math.round((habit.progress / habit.target) * 100)}%
                       </span>
                     </div>
                     <div className="h-2 w-full bg-purple-100">
                       <div
                         className="h-full bg-green-600 transition-all duration-300"
                         style={{
-                          width: `${(habit.progress / habit.goal) * 100}%`,
+                          width: `${(habit.progress / habit.target) * 100}%`,
                         }}
                       />
                     </div>
