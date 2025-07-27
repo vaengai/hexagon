@@ -56,7 +56,6 @@ export function AddHabit({
       active: true,
       frequency: frequency,
     };
-    console.log("Submitting habit payload:", payload);
     onSubmit(payload);
   };
 

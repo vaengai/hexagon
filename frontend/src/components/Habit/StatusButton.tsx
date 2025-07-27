@@ -7,7 +7,6 @@ async function updateStatusApi(id: string, status: string): Promise<string> {
   const url = `${import.meta.env.VITE_HEXAGON_API_BASE_URL}/habit/${encodeURIComponent(id)}/status/${encodeURIComponent(status)}`;
 
   const response = await axios.patch(url);
-  console.log("response from updateStatusApi", response.data);
   return response.data.status;
 }
 
