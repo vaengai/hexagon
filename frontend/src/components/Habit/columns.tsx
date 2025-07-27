@@ -96,5 +96,6 @@ export const baseColumns = (
   {
     id: "actions",
     header: "Actions",
+    cell: () => null,
   },
 ];

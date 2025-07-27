@@ -80,6 +80,18 @@ export function DataTable({
 }: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [editHabit, setEditHabit] = React.useState<Habit | null>(null);
+
+  const handleEditClick = (habit: Habit) => {
+    setEditHabit(habit);
+    setShowEditHabit(true);
+  };
+
+  const handleEditSubmit = async (updatedHabit: Habit) => {
+    await onEditHabit(updatedHabit);
+    setShowEditHabit(false);
+    setEditHabit(null);
+  };
+
   // DataTable.tsx
   const columns = React.useMemo(
     () =>
@@ -97,7 +109,7 @@ export function DataTable({
             }
           : col
       ),
-    [baseColumns, onDeleteHabit]
+    [baseColumns, handleEditClick, onDeleteHabit]
   );
 
   const table = useReactTable({
@@ -110,17 +122,6 @@ export function DataTable({
       sorting,
     },
   });
-
-  const handleEditClick = (habit: Habit) => {
-    setEditHabit(habit);
-    setShowEditHabit(true);
-  };
-
-  const handleEditSubmit = async (updatedHabit: Habit) => {
-    await onEditHabit(updatedHabit);
-    setShowEditHabit(false);
-    setEditHabit(null);
-  };
 
   return (
     <>
