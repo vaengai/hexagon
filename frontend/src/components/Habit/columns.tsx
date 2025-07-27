@@ -6,7 +6,7 @@ import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import StatusButton from "./StatusButton";
 import type { Habit } from "@/types/habit";
-import Action from "./Action";
+// import Action from "./Action";
 import ToggleActive from "./ToggleActive";
 
 function toTitleCase(word: string) {
@@ -96,8 +96,5 @@ export const baseColumns = (
   {
     id: "actions",
     header: "Actions",
-    cell: ({ row }) => (
-      <Action habitId={row.original.id} onDelete={onDeleteHabit} />
-    ),
   },
 ];

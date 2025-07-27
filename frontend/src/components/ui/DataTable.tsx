@@ -23,7 +23,7 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
+  // CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -47,6 +47,7 @@ import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
 
 import { Button } from "@/components/ui/button";
 import { AddHabit } from "../Habit/AddHabit";
+import EditHabit from "../Habit/EditHabit";
 
 import type { Habit } from "@/types/habit";
 import StatusButton from "../Habit/StatusButton";
@@ -60,18 +61,44 @@ type DataTableProps = {
   onAddHabit: (habit: Omit<Habit, "id">) => void;
   onDeleteHabit: (id: string) => void;
   refetchHabits: () => void;
+  showEditHabit: boolean;
+  setShowEditHabit: (show: boolean) => void;
+  onEditHabit: (habit: Habit) => void;
 };
 
 export function DataTable({
-  columns,
+  columns: baseColumns,
   data,
   showAddHabit,
   setShowAddHabit,
   onAddHabit,
   onDeleteHabit,
   refetchHabits,
+  showEditHabit,
+  setShowEditHabit,
+  onEditHabit,
 }: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [editHabit, setEditHabit] = React.useState<Habit | null>(null);
+  // DataTable.tsx
+  const columns = React.useMemo(
+    () =>
+      baseColumns.map((col) =>
+        col.id === "actions"
+          ? {
+              ...col,
+              cell: ({ row }) => (
+                <Action
+                  habitId={row.original.id}
+                  onDelete={onDeleteHabit}
+                  onEdit={() => handleEditClick(row.original)}
+                />
+              ),
+            }
+          : col
+      ),
+    [baseColumns, onDeleteHabit]
+  );
 
   const table = useReactTable({
     data,
@@ -84,6 +111,17 @@ export function DataTable({
     },
   });
 
+  const handleEditClick = (habit: Habit) => {
+    setEditHabit(habit);
+    setShowEditHabit(true);
+  };
+
+  const handleEditSubmit = async (updatedHabit: Habit) => {
+    await onEditHabit(updatedHabit);
+    setShowEditHabit(false);
+    setEditHabit(null);
+  };
+
   return (
     <>
       {showAddHabit && (
@@ -91,6 +129,17 @@ export function DataTable({
           open={showAddHabit}
           onClose={() => setShowAddHabit(false)}
           onSubmit={onAddHabit}
+        />
+      )}
+      {showEditHabit && editHabit && (
+        <EditHabit
+          open={showEditHabit}
+          onClose={() => {
+            setShowEditHabit(false);
+            setEditHabit(null);
+          }}
+          habit={editHabit}
+          onSubmit={handleEditSubmit}
         />
       )}
       <Tabs
@@ -241,7 +290,11 @@ export function DataTable({
                         currentState={habit.active}
                         refetchHabits={refetchHabits}
                       />
-                      <Action habitId={habit.id} onDelete={onDeleteHabit} />
+                      <Action
+                        habitId={habit.id}
+                        onEdit={() => handleEditClick(habit)}
+                        onDelete={onDeleteHabit}
+                      />
                     </div>
                   </div>
                   <CardTitle className="text-xl mt-2">{habit.title}</CardTitle>
@@ -250,7 +303,7 @@ export function DataTable({
                   </CardDescription>
                 </CardHeader>
 
-                <CardContent className="text-sm">
+                <CardContent className="text-sm mb-4">
                   <div className="mt-2">
                     <div className="flex justify-between text-sm text-muted-foreground mb-1">
                       <span>Progress</span>
@@ -268,14 +321,6 @@ export function DataTable({
                     </div>
                   </div>
                 </CardContent>
-
-                <CardFooter>
-                  <p
-                    className={`text-xs font-semibold ${habit.active ? "text-green-600" : "text-red-500"}`}
-                  >
-                    {habit.active ? "Active" : "Inactive"}
-                  </p>
-                </CardFooter>
               </Card>
             ))}
           </div>

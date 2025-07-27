@@ -2,11 +2,13 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { IconDotsVertical } from "@tabler/icons-react";
+import { IconPencil } from "@tabler/icons-react";
+import { IconTrash } from "@tabler/icons-react";
+// import { Habit } from "@/types/habit";
 import axios from "axios";
 
 async function deleteHabitApi(id: string) {
@@ -18,15 +20,18 @@ async function deleteHabitApi(id: string) {
 
 export default function Action({
   habitId,
-  onDelete = () => {},
+  onDelete,
+  onEdit,
 }: {
   habitId: string;
   onDelete: (id: string) => void;
+  onEdit: () => void;
 }) {
   const handleDelete = async () => {
     await deleteHabitApi(habitId);
     onDelete(habitId);
   };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -40,11 +45,12 @@ export default function Action({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-32">
-        <DropdownMenuItem>Edit</DropdownMenuItem>
-        <DropdownMenuItem>Make a copy</DropdownMenuItem>
-        <DropdownMenuItem>Favorite</DropdownMenuItem>
-        <DropdownMenuSeparator />
+        <DropdownMenuItem onSelect={onEdit}>
+          <IconPencil />
+          Edit
+        </DropdownMenuItem>
         <DropdownMenuItem variant="destructive" onSelect={handleDelete}>
+          <IconTrash />
           Delete
         </DropdownMenuItem>
       </DropdownMenuContent>

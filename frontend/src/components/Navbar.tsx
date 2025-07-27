@@ -1,5 +1,7 @@
 import user_img from "../assets/Venkatesh_circle.png";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+// import { IconBell } from "@tabler/icons-react";
+import { IconHexagonLetterHFilled } from "@tabler/icons-react";
 import {
   ChartBarSquareIcon,
   PencilSquareIcon,
@@ -13,11 +15,13 @@ export default function Navbar() {
   return (
     <header className="z-50 flex justify-between items-center py-6 px-8 md:px-8 drop-shadow-md relative">
       <Link to="/" className="flex items-center gap-2">
-        <i className="bxr bx-blur hover:animate-pulse text-sky-700 text-6xl" />
-        <span className="text-4xl text-white font-thin">HEXAGON</span>
+        <IconHexagonLetterHFilled size={48} color="#38bdf8" />
+        {/* <i className="bxr bx-blur hover:animate-pulse text-sky-700 text-6xl" />
+        <span className="text-4xl text-white font-thin">HEXAGON</span> */}
       </Link>
       <div className="flex items-center gap-6 ml-auto">
-        <i className="bx bx-bell text-4xl hover:text-white text-gray-500 font-light"></i>
+        {/* <i className="bx bx-bell text-4xl hover:text-white text-gray-500 font-light"></i> */}
+        {/* <IconBell size={32} onClick={console.log("no notifications")} /> */}
         <Menu>
           <MenuButton className="focus:outline-none cursor-pointer hover:animate-pulse">
             <img

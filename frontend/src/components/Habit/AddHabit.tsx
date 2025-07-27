@@ -18,10 +18,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { HABIT_CATEGORIES } from "@/constants/habitCategories";
-import type { HabitCategory } from "@/constants/habitCategories";
-import type { HabitFrequency } from "@/constants/habitFrequency";
-import { HABIT_FREQUENCY } from "@/constants/habitFrequency";
+import { HABIT_CATEGORIES } from "@/types/habitCategory";
+import type { HabitCategory } from "@/types/habitCategory";
+import type { HabitFrequency } from "@/types/habitFrequency";
+import { HABIT_FREQUENCY } from "@/types/habitFrequency";
 import type { Habit } from "@/types/habit";
 
 import { Input } from "@/components/ui/input";
@@ -149,7 +149,7 @@ export function AddHabit({
               </Button>
             </DialogClose>
             <Button type="submit" className="px-4">
-              Add Habit
+              Add
             </Button>
           </DialogFooter>
         </form>
