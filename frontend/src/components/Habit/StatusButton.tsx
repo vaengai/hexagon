@@ -25,7 +25,7 @@ export default function StatusButton({
   const [status, setStatus] = useState(initialStatus);
 
   const handleClick = async () => {
-    const newStatus = status === "PENDING" ? "DONE" : "PENDING";
+    const newStatus = status.toLowerCase() === "pending" ? "Done" : "Pending";
     setStatus(newStatus);
     await updateStatusApi(id, newStatus);
     refetchHabits();

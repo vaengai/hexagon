@@ -9,11 +9,6 @@ import type { Habit } from "@/types/habit";
 // import Action from "./Action";
 import ToggleActive from "./ToggleActive";
 
-function toTitleCase(word: string) {
-  if (!word) return "";
-  return word.charAt(0).toUpperCase() + word.slice(1).toLocaleLowerCase();
-}
-
 export const baseColumns = (
   onDeleteHabit: (id: string) => void,
   refetchHabits: () => void
@@ -48,7 +43,7 @@ export const baseColumns = (
     cell: ({ row }) => (
       <StatusButton
         id={row.original.id}
-        initialStatus={row.original.status}
+        initialStatus={row.original.status.toUpperCase()}
         refetchHabits={refetchHabits}
         disabled={row.original.active}
       />
@@ -79,7 +74,6 @@ export const baseColumns = (
   {
     accessorKey: "frequency",
     header: "Frequency",
-    cell: ({ row }) => toTitleCase(row.original.frequency),
   },
   {
     accessorKey: "active",

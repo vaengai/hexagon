@@ -45,7 +45,7 @@ export function AddHabit({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !selected || !frequency) return;
-    const PENDING_STATUS = "PENDING" as const;
+    const PENDING_STATUS = "Pending" as const;
 
     const payload = {
       title: name,
