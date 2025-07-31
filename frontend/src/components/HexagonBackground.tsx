@@ -60,13 +60,14 @@ export default function HexagonBackground() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            width: "80%",
+            width: "85%",
             margin: "0 auto",
             fontSize: "4rem",
             fontWeight: "bold",
             fontFamily: "monospace",
             textAlign: "center",
             flexDirection: "column",
+            // marginTop: "3rem",
           }}
         >
           <TextType
@@ -75,15 +76,16 @@ export default function HexagonBackground() {
             ]}
             typingSpeed={100}
             pauseDuration={1000}
-            showCursor={true}
+            showCursor={false}
             loop={false}
             cursorCharacter="_"
             textColors={["#eab676"]}
+            startOnVisible={true}
             // onSentenceComplete={handleSentenceComplete}
           />
           <div
             style={{
-              marginTop: "1.5rem",
+              marginTop: "5.5rem",
               fontSize: "1.5rem",
               color: "#fff",
               fontWeight: 400,
@@ -96,18 +98,10 @@ export default function HexagonBackground() {
           <div className="flex justify-center mt-10">
             <button
               onClick={() => navigate("/habit")}
-              className="rounded-md shadow-2xs hover:shadow-lg cursor-pointer p-8 flex flex-col items-center w-sm border-sky-400 shadow-sky-200 border-2"
+              className="rounded-lg shadow-2xs hover:shadow-lg cursor-pointer p-4 flex flex-col items-center bg-sky-800 border-sky-600 shadow-sky-200 border-2"
               type="button"
             >
-              <PlusIcon className="w-16 h-16 mb-2 text-gray-300" />
-              <div className="flex h-12 w-48 items-center justify-center rounded-lg  text-white">
-                <div className="flex h-full w-full items-center justify-center rounded-lg bg-slate-700 text-lg">
-                  Get Started
-                </div>
-              </div>
-              <p className="mt-4 text-lg font-light text-white text-center">
-                Create a new habit to start tracking your progress
-              </p>
+              <p className="text-lg font-extrabold text-center">Get Started</p>
             </button>
           </div>
         </div>

@@ -211,10 +211,7 @@ export function DataTable({
                   <TableRow key={headerGroup.id}>
                     {headerGroup.headers.map((header) => {
                       return (
-                        <TableHead
-                          className="py-2 px-4 text-lg"
-                          key={header.id}
-                        >
+                        <TableHead className="py-2 px-4" key={header.id}>
                           {header.isPlaceholder
                             ? null
                             : flexRender(
@@ -318,7 +315,7 @@ export function DataTable({
                     </div>
                     <div className="h-2 w-full bg-purple-100">
                       <div
-                        className="h-full bg-green-700 transition-all duration-300"
+                        className="h-full bg-sky-600 transition-all duration-300"
                         style={{
                           width: `${Math.min(100, Math.round((habit.progress / habit.target) * 100))}%`,
                         }}
