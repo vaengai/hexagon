@@ -1,9 +1,19 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
+// import Hero from "./components/Hero";
 import { HabitTable } from "./components/Habit/HabitTable";
 import { useEffect } from "react";
+// import DotGrid from "./components/backgrounds/DotGrid/DotGrid";
+import HexagonBackground from "./components/HexagonBackground";
 
+function HabitLayout() {
+  return (
+    <div>
+      <Navbar />
+      <HabitTable />
+    </div>
+  );
+}
 export default function App() {
   useEffect(() => {
     document.documentElement.classList.add("dark");
@@ -11,13 +21,11 @@ export default function App() {
 
   return (
     <Router>
-      <div className="relative overflow-x-hidden overflow-y-hidden w-full min-h-screen bg-gradient-to-b from-neutral-950 to-stone-900">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Hero />} />
-          <Route path="/habit" element={<HabitTable />} />
-        </Routes>
-      </div>
+      {/* <HexagonBackground /> */}
+      <Routes>
+        <Route path="/" element={<HexagonBackground />} />
+        <Route path="/habit" element={<HabitLayout />} />
+      </Routes>
     </Router>
   );
 }

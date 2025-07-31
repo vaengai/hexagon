@@ -18,7 +18,7 @@ export const baseColumns = (
     header: ({ column }) => {
       return (
         <Button
-          variant="ghost"
+          variant="none"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Habit
@@ -32,7 +32,7 @@ export const baseColumns = (
     header: ({ column }) => {
       return (
         <Button
-          variant="ghost"
+          variant="none"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Status
@@ -54,7 +54,7 @@ export const baseColumns = (
     header: ({ column }) => {
       return (
         <Button
-          variant="ghost"
+          variant="none"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Category

@@ -203,9 +203,9 @@ export function DataTable({
           </div>
         </div>
         <TabsContent value="list-view" className="relative flex flex-col gap-4">
-          <div className=" rounded-lg border ">
-            <Table className="text-md">
-              <TableHeader className="bg-muted">
+          <div className=" rounded-lg border overflow-hidden">
+            <Table>
+              <TableHeader className="bg-sky-800 border">
                 {table.getHeaderGroups().map((headerGroup) => (
                   <TableRow key={headerGroup.id}>
                     {headerGroup.headers.map((header) => {

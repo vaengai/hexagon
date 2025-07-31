@@ -13,9 +13,9 @@ import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
-    <header className="z-50 flex justify-between items-center py-6 px-8 md:px-8 drop-shadow-md relative">
+    <header className="z-50 flex justify-between items-center py-6 px-8 md:px-8 relative">
       <Link to="/" className="flex items-center gap-2">
-        <IconHexagonLetterHFilled size={48} color="#38bdf8" />
+        <IconHexagonLetterHFilled size={60} color="#eab676" />
         {/* <i className="bxr bx-blur hover:animate-pulse text-sky-700 text-6xl" />
         <span className="text-4xl text-white font-thin">HEXAGON</span> */}
       </Link>
