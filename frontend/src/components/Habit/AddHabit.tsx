@@ -61,16 +61,16 @@ export function AddHabit({
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px]  font-mono">
         <DialogHeader>
           <DialogTitle>Add Habit</DialogTitle>
           <DialogDescription>
-            Enter details for your new habit.
+            Enter details for your new habit
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
-          <div className="grid gap-4 py-4">
-            <div className="grid gap-2">
+          <div className="grid gap-4 py-4 font-mono">
+            <div className="grid gap-2  font-mono">
               <Label htmlFor="habit-name">Habit Name</Label>
               <Input
                 id="habit-name"
@@ -81,18 +81,25 @@ export function AddHabit({
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
-            <div className="grid gap-2 py-2">
+            <div className="grid gap-2 py-2 font-mono">
               <Label htmlFor="habit-category">Category</Label>
               <Select
                 onValueChange={(value) => setSelected(value as HabitCategory)}
               >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select a category" />
+                <SelectTrigger className="w-full font-mono">
+                  <SelectValue
+                    className="font-mono"
+                    placeholder="Select a category"
+                  />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
                     {HABIT_CATEGORIES.map((category) => (
-                      <SelectItem key={category} value={category}>
+                      <SelectItem
+                        key={category}
+                        value={category}
+                        className="font-mono"
+                      >
                         {category}
                       </SelectItem>
                     ))}
@@ -124,12 +131,19 @@ export function AddHabit({
                   }
                 >
                   <SelectTrigger className="flex-1 min-w-0">
-                    <SelectValue placeholder="Frequency" />
+                    <SelectValue
+                      className="font-mono"
+                      placeholder="Frequency"
+                    />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
                       {HABIT_FREQUENCY.map((frequency) => (
-                        <SelectItem key={frequency} value={frequency}>
+                        <SelectItem
+                          className="font-mono"
+                          key={frequency}
+                          value={frequency}
+                        >
                           {frequency}
                         </SelectItem>
                       ))}
@@ -143,11 +157,15 @@ export function AddHabit({
           <div className="border-t border-border my-6"></div>
           <DialogFooter className="gap-4">
             <DialogClose asChild>
-              <Button type="button" variant="outline" className="px-4">
+              <Button
+                type="button"
+                variant="outline"
+                className="px-4 font-mono"
+              >
                 Cancel
               </Button>
             </DialogClose>
-            <Button type="submit" className="px-4">
+            <Button type="submit" className="px-4 font-mono">
               Add
             </Button>
           </DialogFooter>

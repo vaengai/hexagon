@@ -56,7 +56,7 @@ export function HabitTable() {
   const columns = baseColumns(handleDeleteHabit, fetchHabits);
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
+    <div className="px-4 sm:px-6 lg:px-8 font-mono">
       <DataTable
         columns={columns}
         data={habits}

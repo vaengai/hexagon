@@ -143,6 +143,7 @@ export function DataTable({
           onSubmit={handleEditSubmit}
         />
       )}
+
       <Tabs
         defaultValue="list-view"
         className="w-full flex-col justify-start gap-6"
@@ -158,7 +159,7 @@ export function DataTable({
               <span className="hidden lg:inline">List view</span>
             </TabsTrigger>
           </TabsList>
-          <div className="flex items-center gap-2 ml-auto">
+          <div className="flex items-center gap-2 ml-auto text-sm">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm">
@@ -168,7 +169,7 @@ export function DataTable({
                   <IconChevronDown />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="w-32">
+              <DropdownMenuContent align="start" className="w-32 font-mono">
                 {table
                   .getAllColumns()
                   .filter(
@@ -277,12 +278,12 @@ export function DataTable({
                 aria-disabled={!habit.active}
               >
                 <CardHeader className="pb-2">
-                  <div className="mb-2 flex items-center">
+                  <div className="mb-1 flex items-center">
                     <StatusButton
                       id={habit.id}
                       initialStatus={habit.status.toUpperCase()}
                       refetchHabits={refetchHabits}
-                      disabled={habit.active}
+                      disabled={!habit.active}
                     />
 
                     <div className="ml-auto flex items-center gap-2">
@@ -298,8 +299,8 @@ export function DataTable({
                       />
                     </div>
                   </div>
-                  <CardTitle className="text-xl mt-2">{habit.title}</CardTitle>
-                  <CardDescription className="text-gray-500 text-sm">
+                  <CardTitle className="text-xl">{habit.title}</CardTitle>
+                  <CardDescription className=" text-sm text-muted-foreground">
                     {habit.category}
                   </CardDescription>
                 </CardHeader>
@@ -314,7 +315,7 @@ export function DataTable({
                     </div>
                     <div className="h-2 w-full bg-purple-100">
                       <div
-                        className="h-full bg-green-600 transition-all duration-300"
+                        className="h-full bg-green-700 transition-all duration-300"
                         style={{
                           width: `${Math.min(100, Math.round((habit.progress / habit.target) * 100))}%`,
                         }}

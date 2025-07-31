@@ -26,6 +26,7 @@ export const baseColumns = (
         </Button>
       );
     },
+    // cell: ({ row }) => <span className="text-lg">{row.original.title}</span>,
   },
   {
     accessorKey: "status",
@@ -45,7 +46,7 @@ export const baseColumns = (
         id={row.original.id}
         initialStatus={row.original.status.toUpperCase()}
         refetchHabits={refetchHabits}
-        disabled={row.original.active}
+        disabled={!row.original.active}
       />
     ),
   },

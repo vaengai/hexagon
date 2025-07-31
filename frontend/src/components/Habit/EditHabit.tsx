@@ -65,7 +65,7 @@ export default function EditHabit({
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent className="font-mono">
         <DialogHeader>
           <DialogTitle>Edit Habit</DialogTitle>
           <DialogDescription>Edit your habit details below</DialogDescription>
@@ -73,6 +73,7 @@ export default function EditHabit({
         <form onSubmit={handleSubmit} className="space-y-4">
           <Label htmlFor="habit-name">Habit Name</Label>
           <Input
+            className="font-mono"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
@@ -88,7 +89,7 @@ export default function EditHabit({
             <SelectContent>
               <SelectGroup>
                 {HABIT_CATEGORIES.map((cat) => (
-                  <SelectItem key={cat} value={cat}>
+                  <SelectItem className="font-mono" key={cat} value={cat}>
                     {cat}
                   </SelectItem>
                 ))}
@@ -104,7 +105,7 @@ export default function EditHabit({
                   value={target}
                   min={1}
                   onChange={(e) => setTarget(Number(e.target.value))}
-                  className="w-24"
+                  className="w-24 font-mono"
                   required
                 />
                 <span className="mx-1">times per</span>
@@ -119,7 +120,11 @@ export default function EditHabit({
                   <SelectContent>
                     <SelectGroup>
                       {HABIT_FREQUENCY.map((freq) => (
-                        <SelectItem key={freq} value={freq}>
+                        <SelectItem
+                          className="font-mono"
+                          key={freq}
+                          value={freq}
+                        >
                           {freq}
                         </SelectItem>
                       ))}
