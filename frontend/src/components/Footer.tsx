@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { IconThumbUp } from "@tabler/icons-react";
+import { IconHeart, IconHeartFilled, IconThumbUp } from "@tabler/icons-react";
 
 const footerLinks = [
   { to: "/about", label: "About" },
@@ -26,15 +26,13 @@ export default function Footer() {
   });
 
   return (
-    <footer className="w-full bg-neutral-900 text-white py-6 px-8 mt-auto">
-      <div className="flex flex-wrap justify-center items-center gap-20">
-        {footerLinks.map((link, i) =>
-          link.label ? (
-            <Link key={i} to={link.to} className="hover:underline">
-              {link.label}
-            </Link>
-          ) : null
-        )}
+    <footer className="w-full bg-neutral-900/50 text-white py-4 px-8 mt-auto justify-between z-50">
+      <div className="flex flex-wrap justify-center items-center gap-10">
+        {footerLinks.map(({ to, label }) => (
+          <Link key={to} to={to} className="flex items-center">
+            {label}
+          </Link>
+        ))}
         <div className="flex items-center ml-auto gap-2">
           <form onSubmit={handleNewsletterSubmit}>
             <input
@@ -52,7 +50,7 @@ export default function Footer() {
               Subscribe
             </button>
           </form>
-          {submitted && <IconThumbUp className="text-sky-600" />}
+          {submitted && <IconHeartFilled className="text-rose-600" />}
         </div>
       </div>
     </footer>

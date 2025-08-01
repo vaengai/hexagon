@@ -30,7 +30,6 @@ export default function HexagonHome() {
           zIndex: 0,
         }}
       >
-        {/* <div style={{ width: "100%", height: "600px", position: "absolute" }}> */}
         <DotGrid
           dotSize={2}
           gap={25}
