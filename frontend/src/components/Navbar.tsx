@@ -1,85 +1,28 @@
-import user_img from "../assets/Venkatesh_circle.png";
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
-// import { IconBell } from "@tabler/icons-react";
 import { IconHexagonLetterHFilled } from "@tabler/icons-react";
-import {
-  ChartBarSquareIcon,
-  PencilSquareIcon,
-  AdjustmentsHorizontalIcon,
-  ArrowRightStartOnRectangleIcon,
-} from "@heroicons/react/16/solid";
-
 import { Link } from "react-router-dom";
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/clerk-react";
+import { UserButton, useUser } from "@clerk/clerk-react";
 
 export default function Navbar() {
+  const { isSignedIn } = useUser();
   return (
     <header className="z-50 flex justify-between items-center py-6 px-8 md:px-8 relative">
       <Link to="/" className="flex items-center gap-2">
         <IconHexagonLetterHFilled size={60} color="#eab676" />
-        {/* <i className="bxr bx-blur hover:animate-pulse text-sky-700 text-6xl" />
-        <span className="text-4xl text-white font-thin">HEXAGON</span> */}
       </Link>
       <div className="flex items-center gap-6 ml-auto ">
-        {/* <i className="bx bx-bell text-4xl hover:text-white text-gray-500 font-light"></i> */}
-        {/* <IconBell size={32} onClick={console.log("no notifications")} /> */}
-        <Menu>
-          <MenuButton className="focus:outline-none cursor-pointer hover:animate-pulse">
-            <header>
-              <SignedOut>
-                <SignInButton />
-              </SignedOut>
-              <SignedIn>
-                <UserButton
-                  appearance={{ elements: { avatarBox: "w-14 h-14" } }}
-                />
-              </SignedIn>
-            </header>
-            {/*<img*/}
-            {/*  src={user_img}*/}
-            {/*  alt="Avatar"*/}
-            {/*  className="w-14 h-14 rounded-full border-white"*/}
-            {/*/>*/}
-          </MenuButton>
-
-          {/*<MenuItems*/}
-          {/*  transition*/}
-          {/*  anchor="bottom end"*/}
-          {/*  className="w-40 origin-top-right rounded-md border border-gray-700 bg-gray-900 p-1 text-base font-light text-white transition duration-100 ease-out [--anchor-gap:--spacing(1)] focus:outline-none data-closed:scale-95 data-closed:opacity-0"*/}
-          {/*>*/}
-          {/*  <MenuItem>*/}
-          {/*    <button className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-white/10 font-mono">*/}
-          {/*      <PencilSquareIcon className="size-6 fill-white" />*/}
-          {/*      Profile*/}
-          {/*    </button>*/}
-          {/*  </MenuItem>*/}
-          {/*  <MenuItem>*/}
-          {/*    <button className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-white/10 font-mono">*/}
-          {/*      <AdjustmentsHorizontalIcon className="size-6 fill-white " />*/}
-          {/*      Settings*/}
-          {/*    </button>*/}
-          {/*  </MenuItem>*/}
-          {/*  <MenuItem>*/}
-          {/*    <button className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-white/10 font-mono">*/}
-          {/*      <ChartBarSquareIcon className="size-6 fill-white " />*/}
-          {/*      Dashboard*/}
-          {/*    </button>*/}
-          {/*  </MenuItem>*/}
-          {/*  <div className="my-1 h-px bg-white/5" />*/}
-
-          {/*  <MenuItem>*/}
-          {/*    <button className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-red-700 bg-red-400 font-mono">*/}
-          {/*      <ArrowRightStartOnRectangleIcon className="size-6 fill-white" />*/}
-          {/*      Logout*/}
-          {/*    </button>*/}
-          {/*  </MenuItem>*/}
-          {/*</MenuItems>*/}
-        </Menu>
+        {isSignedIn ? (
+          <UserButton
+            appearance={{
+              elements: {
+                avatarBox: "w-14 h-14",
+                userButtonPopoverCard: "font-mono",
+                userButtonPopoverActionButton__signOut: "text-red-400",
+              },
+            }}
+          />
+        ) : (
+          <Link to="/sign-in">Sign-in</Link>
+        )}
       </div>
     </header>
   );

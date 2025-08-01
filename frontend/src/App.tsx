@@ -5,7 +5,8 @@ import { HabitTable } from "./components/Habit/HabitTable";
 import { useEffect } from "react";
 // import DotGrid from "./components/backgrounds/DotGrid/DotGrid";
 import HexagonBackground from "./components/HexagonBackground";
-
+import SignInPage from "./components/Login";
+// import ProfilePage from "./components/ProfilePage";
 function HabitLayout() {
   return (
     <div>
@@ -20,16 +21,15 @@ export default function App() {
   }, []);
 
   return (
-      <>
-
-          <Router>
-              {/* <HexagonBackground /> */}
-              <Routes>
-                  <Route path="/" element={<HexagonBackground />} />
-                  <Route path="/habit" element={<HabitLayout />} />
-              </Routes>
-          </Router>
-      </>
-
+    <>
+      <Router>
+        {/* <HexagonBackground /> */}
+        <Routes>
+          <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/" element={<HexagonBackground />} />
+          <Route path="/habit" element={<HabitLayout />} />
+        </Routes>
+      </Router>
+    </>
   );
 }

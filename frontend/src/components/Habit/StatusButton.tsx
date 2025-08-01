@@ -16,18 +16,17 @@ export default function StatusButton({
   initialStatus,
   refetchHabits,
   disabled,
-  onDone,
+  onDone = () => {},
 }: {
   id: string;
   initialStatus: string;
   refetchHabits: () => void;
   disabled: boolean;
-  onDone: () => void;
+  onDone?: () => void;
 }) {
   const [status, setStatus] = useState(initialStatus);
 
   const handleClick = async () => {
-    console.log("Button clicked");
     const newStatus = status.toLowerCase() === "pending" ? "Done" : "Pending";
     setStatus(newStatus);
     if (newStatus === "Done") {
