@@ -11,7 +11,8 @@ import ToggleActive from "./ToggleActive";
 
 export const baseColumns = (
   onDeleteHabit: (id: string) => void,
-  refetchHabits: () => void
+  refetchHabits: () => void,
+  handleDone: () => void
 ): ColumnDef<Habit>[] => [
   {
     accessorKey: "title",
@@ -47,6 +48,7 @@ export const baseColumns = (
         initialStatus={row.original.status.toUpperCase()}
         refetchHabits={refetchHabits}
         disabled={!row.original.active}
+        onDone={handleDone}
       />
     ),
   },

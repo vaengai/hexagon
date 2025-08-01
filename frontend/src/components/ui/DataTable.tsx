@@ -1,7 +1,8 @@
 "use client";
 
 import * as React from "react";
-
+import Confetti from "react-confetti";
+import { useWindowSize } from "@react-hook/window-size";
 import {
   type ColumnDef,
   type SortingState,
@@ -80,6 +81,13 @@ export function DataTable({
 }: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [editHabit, setEditHabit] = React.useState<Habit | null>(null);
+  const [showConfetti, setShowConfetti] = React.useState(false);
+  const [width, height] = useWindowSize();
+
+  const handleDone = () => {
+    setShowConfetti(false); // Hide first
+    setTimeout(() => setShowConfetti(true), 10); // Show after a short delay
+  };
 
   const handleEditClick = (habit: Habit) => {
     setEditHabit(habit);
@@ -92,7 +100,6 @@ export function DataTable({
     setEditHabit(null);
   };
 
-  // DataTable.tsx
   const columns = React.useMemo(
     () =>
       baseColumns.map((col) =>
@@ -112,6 +119,7 @@ export function DataTable({
     [baseColumns, handleEditClick, onDeleteHabit]
   );
 
+  // const columns = React.useMemo(() => baseColumns, [baseColumns]);
   const table = useReactTable({
     data,
     columns,
@@ -141,6 +149,15 @@ export function DataTable({
           }}
           habit={editHabit}
           onSubmit={handleEditSubmit}
+        />
+      )}
+
+      {showConfetti && (
+        <Confetti
+          width={width}
+          height={height}
+          recycle={false}
+          onConfettiComplete={() => setShowConfetti(false)}
         />
       )}
 
@@ -284,6 +301,7 @@ export function DataTable({
                       initialStatus={habit.status.toUpperCase()}
                       refetchHabits={refetchHabits}
                       disabled={!habit.active}
+                      onDone={handleDone}
                     />
 
                     <div className="ml-auto flex items-center gap-2">

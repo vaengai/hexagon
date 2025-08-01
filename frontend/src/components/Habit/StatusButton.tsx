@@ -2,9 +2,7 @@ import { Button } from "@headlessui/react";
 import { useState } from "react";
 import { statusColors } from "@/constants/statusColors";
 import axios from "axios";
-import { HABIT_STATUS } from "@/types/habitStatus";
-import * as React from "react";
-import Confetti from "react-confetti";
+// import { HABIT_STATUS } from "@/types/habitStatus";
 
 async function updateStatusApi(id: string, status: string): Promise<string> {
   const url = `${import.meta.env.VITE_HEXAGON_API_BASE_URL}/habit/${encodeURIComponent(id)}/status/${encodeURIComponent(status)}`;
@@ -18,29 +16,22 @@ export default function StatusButton({
   initialStatus,
   refetchHabits,
   disabled,
+  onDone,
 }: {
   id: string;
   initialStatus: string;
   refetchHabits: () => void;
   disabled: boolean;
+  onDone: () => void;
 }) {
   const [status, setStatus] = useState(initialStatus);
-  const [showConfetti, setShowConfetti] = React.useState(false);
-
-  React.useEffect(() => {
-    if (showConfetti) {
-      const timer = setTimeout(() => setShowConfetti(false), 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [showConfetti]);
 
   const handleClick = async () => {
     console.log("Button clicked");
     const newStatus = status.toLowerCase() === "pending" ? "Done" : "Pending";
     setStatus(newStatus);
     if (newStatus === "Done") {
-      console.log("Status is Done, show is true");
-      setShowConfetti(true);
+      onDone();
     }
     await updateStatusApi(id, newStatus);
     refetchHabits();
@@ -48,13 +39,6 @@ export default function StatusButton({
 
   return (
     <>
-      {showConfetti && (
-        <Confetti
-          width={window.innerWidth}
-          height={window.innerHeight}
-          recycle={false}
-        />
-      )}
       <Button
         onClick={handleClick}
         disabled={disabled}
