@@ -20,12 +20,16 @@ export default function App() {
   }, []);
 
   return (
-    <Router>
-      {/* <HexagonBackground /> */}
-      <Routes>
-        <Route path="/" element={<HexagonBackground />} />
-        <Route path="/habit" element={<HabitLayout />} />
-      </Routes>
-    </Router>
+      <>
+
+          <Router>
+              {/* <HexagonBackground /> */}
+              <Routes>
+                  <Route path="/" element={<HexagonBackground />} />
+                  <Route path="/habit" element={<HabitLayout />} />
+              </Routes>
+          </Router>
+      </>
+
   );
 }

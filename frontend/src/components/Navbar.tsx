@@ -10,6 +10,12 @@ import {
 } from "@heroicons/react/16/solid";
 
 import { Link } from "react-router-dom";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/clerk-react";
 
 export default function Navbar() {
   return (
@@ -24,45 +30,55 @@ export default function Navbar() {
         {/* <IconBell size={32} onClick={console.log("no notifications")} /> */}
         <Menu>
           <MenuButton className="focus:outline-none cursor-pointer hover:animate-pulse">
-            <img
-              src={user_img}
-              alt="Avatar"
-              className="w-14 h-14 rounded-full border-white"
-            />
+            <header>
+              <SignedOut>
+                <SignInButton />
+              </SignedOut>
+              <SignedIn>
+                <UserButton
+                  appearance={{ elements: { avatarBox: "w-14 h-14" } }}
+                />
+              </SignedIn>
+            </header>
+            {/*<img*/}
+            {/*  src={user_img}*/}
+            {/*  alt="Avatar"*/}
+            {/*  className="w-14 h-14 rounded-full border-white"*/}
+            {/*/>*/}
           </MenuButton>
 
-          <MenuItems
-            transition
-            anchor="bottom end"
-            className="w-40 origin-top-right rounded-md border border-gray-700 bg-gray-900 p-1 text-base font-light text-white transition duration-100 ease-out [--anchor-gap:--spacing(1)] focus:outline-none data-closed:scale-95 data-closed:opacity-0"
-          >
-            <MenuItem>
-              <button className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-white/10 font-mono">
-                <PencilSquareIcon className="size-6 fill-white" />
-                Profile
-              </button>
-            </MenuItem>
-            <MenuItem>
-              <button className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-white/10 font-mono">
-                <AdjustmentsHorizontalIcon className="size-6 fill-white " />
-                Settings
-              </button>
-            </MenuItem>
-            <MenuItem>
-              <button className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-white/10 font-mono">
-                <ChartBarSquareIcon className="size-6 fill-white " />
-                Dashboard
-              </button>
-            </MenuItem>
-            <div className="my-1 h-px bg-white/5" />
+          {/*<MenuItems*/}
+          {/*  transition*/}
+          {/*  anchor="bottom end"*/}
+          {/*  className="w-40 origin-top-right rounded-md border border-gray-700 bg-gray-900 p-1 text-base font-light text-white transition duration-100 ease-out [--anchor-gap:--spacing(1)] focus:outline-none data-closed:scale-95 data-closed:opacity-0"*/}
+          {/*>*/}
+          {/*  <MenuItem>*/}
+          {/*    <button className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-white/10 font-mono">*/}
+          {/*      <PencilSquareIcon className="size-6 fill-white" />*/}
+          {/*      Profile*/}
+          {/*    </button>*/}
+          {/*  </MenuItem>*/}
+          {/*  <MenuItem>*/}
+          {/*    <button className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-white/10 font-mono">*/}
+          {/*      <AdjustmentsHorizontalIcon className="size-6 fill-white " />*/}
+          {/*      Settings*/}
+          {/*    </button>*/}
+          {/*  </MenuItem>*/}
+          {/*  <MenuItem>*/}
+          {/*    <button className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-white/10 font-mono">*/}
+          {/*      <ChartBarSquareIcon className="size-6 fill-white " />*/}
+          {/*      Dashboard*/}
+          {/*    </button>*/}
+          {/*  </MenuItem>*/}
+          {/*  <div className="my-1 h-px bg-white/5" />*/}
 
-            <MenuItem>
-              <button className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-red-700 bg-red-400 font-mono">
-                <ArrowRightStartOnRectangleIcon className="size-6 fill-white" />
-                Logout
-              </button>
-            </MenuItem>
-          </MenuItems>
+          {/*  <MenuItem>*/}
+          {/*    <button className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-focus:bg-red-700 bg-red-400 font-mono">*/}
+          {/*      <ArrowRightStartOnRectangleIcon className="size-6 fill-white" />*/}
+          {/*      Logout*/}
+          {/*    </button>*/}
+          {/*  </MenuItem>*/}
+          {/*</MenuItems>*/}
         </Menu>
       </div>
     </header>
