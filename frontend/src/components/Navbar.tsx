@@ -1,7 +1,6 @@
 import { IconBell, IconHexagonLetterH } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { UserButton, useUser } from "@clerk/clerk-react";
-import { Icon } from "lucide-react";
 
 const navLinks = [
   { to: "/Dashboard", label: "Dashboard" },
@@ -13,7 +12,7 @@ const navLinks = [
 export default function Navbar() {
   const { isSignedIn } = useUser();
   return (
-    <header className="z-50 flex justify-between items-center py-6 px-8 md:px-8 relative">
+    <header className="top-0 left-0 w-full z-50 flex justify-between items-center py-6 px-8 bg-transparent shadow relative">
       <Link to="/" className="flex items-center gap-2">
         <IconHexagonLetterH size={60} color="#eab676" />
       </Link>
