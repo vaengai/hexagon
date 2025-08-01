@@ -10,6 +10,11 @@ export default function SignInPage() {
             footer: { display: "none" },
           },
         }}
+        localization={{
+          signIn: {
+            title: "Sign in to Hexagon",
+          },
+        }}
       />
     </div>
   );
