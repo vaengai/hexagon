@@ -1,7 +1,7 @@
 import TextType from "./animations/TextType/TextType";
 import DotGrid from "./backgrounds/DotGrid/DotGrid";
-import React, { useState } from "react";
-import { PlusIcon } from "@heroicons/react/24/solid";
+// import React, { useState } from "react";
+// import { PlusIcon } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 // import TextType from "./animations/TextType/TextType";

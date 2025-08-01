@@ -24,6 +24,7 @@ import type { HabitCategory } from "@/types/habitCategory";
 import type { HabitFrequency } from "@/types/habitFrequency";
 import { HABIT_FREQUENCY } from "@/types/habitFrequency";
 import type { Habit } from "@/types/habit";
+import {validateForm} from "@/common/habitUtils.ts";
 
 export default function EditHabit({
   open,
@@ -40,6 +41,7 @@ export default function EditHabit({
   const [category, setCategory] = useState<HabitCategory | "">("");
   const [target, setTarget] = useState<number>(1);
   const [frequency, setFrequency] = useState<HabitFrequency | "">("");
+  const [formErrors, setFormErrors] = useState<string[]>([]);
 
   useEffect(() => {
     if (habit) {
@@ -54,13 +56,22 @@ export default function EditHabit({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit({
-      ...habit,
-      title: name,
-      category: category as HabitCategory,
-      target: target,
-      frequency: frequency as HabitFrequency,
-    });
+
+    const payload = {
+        ...habit,
+        title: name,
+        category: category as HabitCategory,
+        target: target,
+        frequency: frequency as HabitFrequency,
+    }
+    const errors : string[]  = validateForm(payload as Omit<Habit, "id">);
+    if (errors.length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
+    setFormErrors([]);
+    onSubmit(payload);
   };
 
   return (
@@ -70,6 +81,15 @@ export default function EditHabit({
           <DialogTitle>Edit Habit</DialogTitle>
           <DialogDescription>Edit your habit details below</DialogDescription>
         </DialogHeader>
+        {formErrors.length > 0 && (
+            <div className="mb font-mono test-sm, text-red-500">
+              <ul className="list-disc pl-5">
+                {formErrors.map((error, index) => (
+                    <li key={index}>{error}</li>
+                ))}
+              </ul>
+            </div>
+        )}
         <form onSubmit={handleSubmit}>
           <div className="grid gap-4 py-4 font-mono">
             <div className="grid gap-2 font-mono">

@@ -27,6 +27,9 @@ import type { Habit } from "@/types/habit";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
+import {validateForm} from "@/common/habitUtils.ts";
+
+
 
 export function AddHabit({
   open,
@@ -41,10 +44,11 @@ export function AddHabit({
   const [target, setTarget] = useState<number>(1);
   const [frequency, setFrequency] = useState<HabitFrequency | "">("");
   const [name, setName] = useState("");
+  const [formErrors, setFormErrors] = useState<string[]>([]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !selected || !frequency) return;
+    // if (!name || !selected || !frequency) return;
     const PENDING_STATUS = "Pending" as const;
 
     const payload = {
@@ -56,7 +60,15 @@ export function AddHabit({
       active: true,
       frequency: frequency,
     };
-    onSubmit(payload);
+
+    const errors: string[] = validateForm(payload as Omit<Habit, "id">);
+    if (errors.length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
+    setFormErrors([]);
+    onSubmit(payload as Omit<Habit, "id">);
   };
 
   return (
@@ -68,6 +80,15 @@ export function AddHabit({
             Enter details for your new habit
           </DialogDescription>
         </DialogHeader>
+        {formErrors.length > 0 && (
+          <div className="mb text-red-500 text-sm font-mono">
+            <ul className="list-disc pl-5">
+              {formErrors.map((error, index) => (
+                <li key={index}>{error}</li>
+              ))}
+            </ul>
+          </div>
+        )}
         <form onSubmit={handleSubmit}>
           <div className="grid gap-4 py-4 font-mono">
             <div className="grid gap-2  font-mono">
@@ -165,7 +186,7 @@ export function AddHabit({
                 Cancel
               </Button>
             </DialogClose>
-            <Button type="submit" className="px-4 font-mono">
+            <Button type="submit" className="px-4 font-mono ">
               Add
             </Button>
           </DialogFooter>
