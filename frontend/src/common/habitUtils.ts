@@ -5,6 +5,9 @@ export function validateForm(payload: Omit<Habit, "id">) {
     if (!payload.title || payload.title.trim() === "") {
         errors.push("Title is required.");
     }
+    if (payload.title.trim().length > 21) {
+        errors.push("Title can't be longer than 21 characters.");
+    }
     if (!payload.category) {
         errors.push("Category is required.");
     }
