@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 // import { ReactNode } from "react";
 
 export default function HexagonHome() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // const [sentenceDone, setSentenceDone] = useState(false);
 
@@ -67,6 +67,7 @@ export default function HexagonHome() {
           textAlign: "center",
           flexDirection: "column",
           marginTop: "10rem",
+          zIndex: 7,
         }}
       >
         <TextType
@@ -89,12 +90,13 @@ export default function HexagonHome() {
             color: "gray",
             fontWeight: 400,
             maxWidth: "700px",
+            zIndex: 8,
           }}
         >
           Stay consistent, track your progress, and become the best version of
           yourself!
         </div>
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center mt-10 z-10">
           <button
             onClick={() => navigate("/habit")}
             className="rounded-lg shadow-2xs hover:shadow-lg cursor-pointer p-4 flex flex-col items-center bg-sky-800 border-sky-600 shadow-sky-200 border-2"
