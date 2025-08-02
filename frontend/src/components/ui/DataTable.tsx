@@ -106,7 +106,7 @@ export function DataTable({
         col.id === "actions"
           ? {
               ...col,
-              cell: ({ row }) => (
+              cell: ({ row }: { row: { original: Habit; id: string } }) => (
                 <Action
                   habitId={row.original.id}
                   onDelete={onDeleteHabit}

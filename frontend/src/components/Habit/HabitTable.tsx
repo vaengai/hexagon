@@ -53,7 +53,7 @@ export function HabitTable() {
     setShowEditHabit(false);
   };
 
-  const columns = baseColumns(handleDeleteHabit, fetchHabits, () => {});
+  const columns = baseColumns(fetchHabits, () => {});
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 font-mono">
