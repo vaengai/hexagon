@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { IconHeart, IconHeartFilled, IconThumbUp } from "@tabler/icons-react";
-
 const footerLinks = [
   { to: "/about", label: "About" },
   { to: "/support", label: "Support" },
@@ -20,7 +18,7 @@ export default function Footer() {
 
   useEffect(() => {
     if (submitted) {
-      const timer = setTimeout(() => setSubmitted(false), 10000);
+      const timer = setTimeout(() => setSubmitted(false), 2000);
       return () => clearTimeout(timer);
     }
   });
@@ -41,7 +39,7 @@ export default function Footer() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-sm px-3 py-2 rounded-l-lg border"
+              className="w-sm px-3 py-2 rounded-l-lg border focus:outline-1"
             />
             <button
               type="submit"
@@ -50,7 +48,7 @@ export default function Footer() {
               Subscribe
             </button>
           </form>
-          {submitted && <IconHeartFilled className="text-rose-600" />}
+          {submitted && <span className="text-2xl">🎉</span>}
         </div>
       </div>
     </footer>

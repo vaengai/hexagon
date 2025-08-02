@@ -288,7 +288,7 @@ export function DataTable({
             {data.map((habit) => (
               <Card
                 key={habit.id}
-                className={`rounded-xl shadow-md border p-4 transition-transform hover:scale-[1.02] ${
+                className={`rounded-xl shadow-md border-1 p-4 transition-transform hover:scale-[1.02] ${
                   !habit.active ? "bg-muted cursor-not-allowed opacity-30" : ""
                 }`}
                 tabIndex={habit.active ? 0 : -1}
