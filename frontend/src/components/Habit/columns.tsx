@@ -6,11 +6,12 @@ import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import StatusButton from "./StatusButton";
 import type { Habit } from "@/types/habit";
-// import Action from "./Action";
+import Action from "./Action";
 import ToggleActive from "./ToggleActive";
 
 export const baseColumns = (
-  // onDeleteHabit: (id: string) => void,
+  onDeleteHabit: (id: string) => void,
+  handleEditHabit: (habit: Habit) => void,
   refetchHabits: () => void,
   handleDone: () => void
 ): ColumnDef<Habit>[] => [
@@ -93,6 +94,12 @@ export const baseColumns = (
   {
     id: "actions",
     header: "Actions",
-    cell: () => null,
+    cell: ({ row }) => (
+      <Action
+        habitId={row.original.id}
+        onEdit={handleEditHabit(row.original)}
+        onDelete={onDeleteHabit}
+      />
+    ),
   },
 ];

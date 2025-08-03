@@ -1,0 +1,15 @@
+meta {
+  name: Clerk Auth Token
+  type: http
+  seq: 9
+}
+
+get {
+  url: https://pleased-hedgehog-10.clerk.accounts.dev/.well-known/jwks.json
+  body: none
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer pk_test_cGxlYXNlZC1oZWRnZWhvZy0xMC5jbGVyay5hY2NvdW50cy5kZXYk
+}

@@ -2,12 +2,24 @@ import { Button } from "@headlessui/react";
 import { useState } from "react";
 import { statusColors } from "@/constants/statusColors";
 import axios from "axios";
-// import { HABIT_STATUS } from "@/types/habitStatus";
+import { useAuth } from "@clerk/clerk-react";
 
-async function updateStatusApi(id: string, status: string): Promise<string> {
+async function updateStatusApi(
+  id: string,
+  status: string,
+  getToken: () => Promise<string | null>
+): Promise<string> {
   const url = `${import.meta.env.VITE_HEXAGON_API_BASE_URL}/habit/${encodeURIComponent(id)}/status/${encodeURIComponent(status)}`;
-
-  const response = await axios.patch(url);
+  const token = await getToken();
+  const response = await axios.patch(
+    url,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
   return response.data.status;
 }
 
@@ -25,6 +37,7 @@ export default function StatusButton({
   onDone?: () => void;
 }) {
   const [status, setStatus] = useState(initialStatus);
+  const { getToken } = useAuth();
 
   const handleClick = async () => {
     const newStatus = status.toLowerCase() === "pending" ? "Done" : "Pending";
@@ -32,7 +45,7 @@ export default function StatusButton({
     if (newStatus === "Done") {
       onDone();
     }
-    await updateStatusApi(id, newStatus);
+    await updateStatusApi(id, newStatus, getToken);
     refetchHabits();
   };
 

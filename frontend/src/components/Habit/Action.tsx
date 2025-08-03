@@ -8,15 +8,9 @@ import { Button } from "@/components/ui/button";
 import { IconDotsVertical } from "@tabler/icons-react";
 import { IconPencil } from "@tabler/icons-react";
 import { IconTrash } from "@tabler/icons-react";
-// import { Habit } from "@/types/habit";
-import axios from "axios";
-
-async function deleteHabitApi(id: string) {
-  const url = `${import.meta.env.VITE_HEXAGON_API_BASE_URL}/habit/${encodeURIComponent(id)}`;
-
-  const response = await axios.delete(url);
-  return response.data;
-}
+// import { useAuth } from "@clerk/clerk-react";
+// import axios from "axios";
+// import type { Habit } from "@/types/habit";
 
 export default function Action({
   habitId,
@@ -28,7 +22,6 @@ export default function Action({
   onEdit: () => void;
 }) {
   const handleDelete = async () => {
-    await deleteHabitApi(habitId);
     onDelete(habitId);
   };
 
