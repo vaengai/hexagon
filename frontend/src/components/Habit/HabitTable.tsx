@@ -11,6 +11,7 @@ export function HabitTable() {
   const [habits, setHabits] = useState<Habit[]>([]);
   const [showAddHabit, setShowAddHabit] = useState(false);
   const [showEditHabit, setShowEditHabit] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const { getToken } = useAuth();
 
@@ -82,11 +83,16 @@ export function HabitTable() {
     setShowEditHabit(false);
   };
 
+  const handleDone = async () => {
+    setShowConfetti(false); // Hide first
+    setTimeout(() => setShowConfetti(true), 10); // Show after a short delay
+  };
+
   const columns = baseColumns(
     handleDeleteHabit,
     handleEditHabit,
     fetchHabits,
-    () => {}
+    handleDone
   );
 
   return (
@@ -102,6 +108,9 @@ export function HabitTable() {
         showEditHabit={showEditHabit}
         setShowEditHabit={setShowEditHabit}
         onEditHabit={handleEditHabit}
+        showConfetti={showConfetti}
+        setShowConfetti={setShowConfetti}
+        handleDone={handleDone}
       />
     </div>
   );

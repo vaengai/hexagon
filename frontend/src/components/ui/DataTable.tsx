@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Confetti from "react-confetti";
-import { useWindowSize } from "@react-hook/window-size";
 import {
   type ColumnDef,
   type SortingState,
@@ -53,6 +52,7 @@ import EditHabit from "../Habit/EditHabit";
 import type { Habit } from "@/types/habit";
 import StatusButton from "../Habit/StatusButton";
 import ToggleActive from "../Habit/ToggleActive";
+import { useWindowSize } from "@react-hook/window-size";
 
 type DataTableProps = {
   columns: ColumnDef<Habit, unknown>[];
@@ -65,6 +65,9 @@ type DataTableProps = {
   showEditHabit: boolean;
   setShowEditHabit: (show: boolean) => void;
   onEditHabit: (habit: Habit) => void;
+  showConfetti: boolean;
+  setShowConfetti: (show: boolean) => void;
+  handleDone: () => void;
 };
 
 export function DataTable({
@@ -78,16 +81,13 @@ export function DataTable({
   showEditHabit,
   setShowEditHabit,
   onEditHabit,
+  showConfetti,
+  setShowConfetti,
+  handleDone,
 }: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [editHabit, setEditHabit] = React.useState<Habit | null>(null);
-  const [showConfetti, setShowConfetti] = React.useState(false);
   const [width, height] = useWindowSize();
-
-  const handleDone = () => {
-    setShowConfetti(false); // Hide first
-    setTimeout(() => setShowConfetti(true), 10); // Show after a short delay
-  };
 
   const handleEditClick = (habit: Habit) => {
     setEditHabit(habit);

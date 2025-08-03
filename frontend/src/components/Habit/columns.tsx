@@ -28,7 +28,6 @@ export const baseColumns = (
         </Button>
       );
     },
-    // cell: ({ row }) => <span className="text-lg">{row.original.title}</span>,
   },
   {
     accessorKey: "status",
@@ -83,7 +82,6 @@ export const baseColumns = (
     accessorKey: "active",
     header: "Active",
     cell: ({ row }) => (
-      // <Switch id="active-status-ind" defaultChecked={row.original.active} />
       <ToggleActive
         habitId={row.original.id}
         currentState={row.original.active}
