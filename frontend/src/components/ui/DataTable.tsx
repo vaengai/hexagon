@@ -59,9 +59,6 @@ type DataTableProps = {
   data: Habit[];
   onDeleteHabit: (id: string) => void;
   refetchHabits: () => void;
-  showEditHabit: boolean;
-  setShowEditHabit: (show: boolean) => void;
-  onEditHabit: (habit: Habit) => void;
   showConfetti: boolean;
   setShowConfetti: (show: boolean) => void;
   handleDone: () => void;
@@ -72,15 +69,12 @@ export function DataTable({
   data,
   onDeleteHabit,
   refetchHabits,
-  showEditHabit,
-  setShowEditHabit,
-  onEditHabit,
   showConfetti,
   setShowConfetti,
   handleDone,
 }: DataTableProps) {
   const [showAddHabit, setShowAddHabit] = React.useState(false);
-
+  const [showEditHabit, setShowEditHabit] = React.useState(false);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [editHabit, setEditHabit] = React.useState<Habit | null>(null);
   const [width, height] = useWindowSize();
@@ -88,12 +82,6 @@ export function DataTable({
   const handleEditClick = (habit: Habit) => {
     setEditHabit(habit);
     setShowEditHabit(true);
-  };
-
-  const handleEditSubmit = async (updatedHabit: Habit) => {
-    await onEditHabit(updatedHabit);
-    setShowEditHabit(false);
-    setEditHabit(null);
   };
 
   const columns = React.useMemo(
@@ -142,11 +130,11 @@ export function DataTable({
         <EditHabit
           open={showEditHabit}
           onClose={() => {
+            refetchHabits();
             setShowEditHabit(false);
             setEditHabit(null);
           }}
           habit={editHabit}
-          onSubmit={handleEditSubmit}
         />
       )}
 

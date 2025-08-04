@@ -24,24 +24,52 @@ import type { HabitCategory } from "@/types/habitCategory";
 import type { HabitFrequency } from "@/types/habitFrequency";
 import { HABIT_FREQUENCY } from "@/types/habitFrequency";
 import type { Habit } from "@/types/habit";
-import {validateForm} from "@/common/habitUtils.ts";
+import { validateForm } from "@/common/habitUtils.ts";
+import { useAuth } from "@clerk/clerk-react";
+import axios from "axios";
 
 export default function EditHabit({
   open,
   onClose,
   habit,
-  onSubmit,
 }: {
   open: boolean;
   onClose: () => void;
   habit: Habit | null;
-  onSubmit: (habit: Habit) => void;
 }) {
   const [name, setName] = useState("");
   const [category, setCategory] = useState<HabitCategory | "">("");
   const [target, setTarget] = useState<number>(1);
   const [frequency, setFrequency] = useState<HabitFrequency | "">("");
   const [formErrors, setFormErrors] = useState<string[]>([]);
+
+  const editHabitApi = async (editHabit: Habit): Promise<Habit> => {
+    const url = `${import.meta.env.VITE_HEXAGON_API_BASE_URL}/habit/${encodeURIComponent(editHabit.id)}`;
+    const token = await getToken();
+    const response = await axios.put(url, editHabit, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  };
+
+  const handleEditHabit = async (habitData: Habit) => {
+    try {
+      await editHabitApi(habitData);
+      onClose();
+    } catch (error: any) {
+      if (
+        error.response &&
+        error.response.status === 400 &&
+        error.response.data?.detail
+      ) {
+        setFormErrors([error.response.data.detail]);
+      } else {
+        setFormErrors(["Failed to add habit. Please try again."]);
+      }
+    }
+  };
 
   useEffect(() => {
     if (habit) {
@@ -52,26 +80,28 @@ export default function EditHabit({
     }
   }, [habit]);
 
+  const { getToken } = useAuth();
+
   if (!habit) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const payload = {
-        ...habit,
-        title: name,
-        category: category as HabitCategory,
-        target: target,
-        frequency: frequency as HabitFrequency,
-    }
-    const errors : string[]  = validateForm(payload as Omit<Habit, "id">);
+      ...habit,
+      title: name,
+      category: category as HabitCategory,
+      target: target,
+      frequency: frequency as HabitFrequency,
+    };
+    const errors: string[] = validateForm(payload as Omit<Habit, "id">);
     if (errors.length > 0) {
       setFormErrors(errors);
       return;
     }
 
     setFormErrors([]);
-    onSubmit(payload);
+    handleEditHabit(payload);
   };
 
   return (
@@ -82,13 +112,13 @@ export default function EditHabit({
           <DialogDescription>Edit your habit details below</DialogDescription>
         </DialogHeader>
         {formErrors.length > 0 && (
-            <div className="mb font-mono test-sm, text-red-500">
-              <ul className="list-disc pl-5">
-                {formErrors.map((error, index) => (
-                    <li key={index}>{error}</li>
-                ))}
-              </ul>
-            </div>
+          <div className="mb font-mono test-sm, text-red-500">
+            <ul className="list-disc pl-5">
+              {formErrors.map((error, index) => (
+                <li key={index}>{error}</li>
+              ))}
+            </ul>
+          </div>
         )}
         <form onSubmit={handleSubmit}>
           <div className="grid gap-4 py-4 font-mono">

@@ -11,7 +11,6 @@ import ToggleActive from "./ToggleActive";
 
 export const baseColumns = (
   onDeleteHabit: (id: string) => void,
-  handleEditHabit: (habit: Habit) => void,
   refetchHabits: () => void,
   handleDone: () => void
 ): ColumnDef<Habit>[] => [

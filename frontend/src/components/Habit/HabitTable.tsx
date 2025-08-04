@@ -9,7 +9,6 @@ import { useAuth } from "@clerk/clerk-react";
 
 export function HabitTable() {
   const [habits, setHabits] = useState<Habit[]>([]);
-  const [showEditHabit, setShowEditHabit] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
 
   const { getToken } = useAuth();
@@ -25,17 +24,6 @@ export function HabitTable() {
       })
       .then((response) => setHabits(response.data))
       .catch((error) => console.error("Error fetching data:", error));
-  };
-
-  const editHabitApi = async (editHabit: Habit): Promise<Habit> => {
-    const url = `${import.meta.env.VITE_HEXAGON_API_BASE_URL}/habit/${encodeURIComponent(editHabit.id)}`;
-    const token = await getToken();
-    const response = await axios.put(url, editHabit, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
   };
 
   const deleteHabitApi = async (id: string): Promise<void> => {
@@ -57,25 +45,12 @@ export function HabitTable() {
     setHabits((prev) => prev.filter((habit) => habit.id !== id));
   };
 
-  const handleEditHabit = async (habitData: Habit) => {
-    const updated = await editHabitApi(habitData);
-    setHabits((prev) =>
-      prev.map((habit) => (habit.id === updated.id ? updated : habit))
-    );
-    setShowEditHabit(false);
-  };
-
   const handleDone = async () => {
     setShowConfetti(false); // Hide first
     setTimeout(() => setShowConfetti(true), 10); // Show after a short delay
   };
 
-  const columns = baseColumns(
-    handleDeleteHabit,
-    handleEditHabit,
-    fetchHabits,
-    handleDone
-  );
+  const columns = baseColumns(handleDeleteHabit, fetchHabits, handleDone);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 font-mono">
@@ -84,9 +59,6 @@ export function HabitTable() {
         data={habits}
         onDeleteHabit={handleDeleteHabit}
         refetchHabits={fetchHabits}
-        showEditHabit={showEditHabit}
-        setShowEditHabit={setShowEditHabit}
-        onEditHabit={handleEditHabit}
         showConfetti={showConfetti}
         setShowConfetti={setShowConfetti}
         handleDone={handleDone}
