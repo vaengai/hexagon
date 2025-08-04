@@ -9,7 +9,6 @@ import { useAuth } from "@clerk/clerk-react";
 
 export function HabitTable() {
   const [habits, setHabits] = useState<Habit[]>([]);
-  const [showAddHabit, setShowAddHabit] = useState(false);
   const [showEditHabit, setShowEditHabit] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
 
@@ -26,17 +25,6 @@ export function HabitTable() {
       })
       .then((response) => setHabits(response.data))
       .catch((error) => console.error("Error fetching data:", error));
-  };
-
-  const addHabitApi = async (newHabit: Omit<Habit, "id">): Promise<Habit> => {
-    const url = `${import.meta.env.VITE_HEXAGON_API_BASE_URL}/habit`;
-    const token = await getToken();
-    const response = await axios.post(url, newHabit, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
   };
 
   const editHabitApi = async (editHabit: Habit): Promise<Habit> => {
@@ -63,12 +51,6 @@ export function HabitTable() {
   useEffect(() => {
     fetchHabits();
   }, []);
-
-  const handleAddHabit = async (habitData: Omit<Habit, "id">) => {
-    const created = await addHabitApi(habitData);
-    setHabits((prev) => [...prev, created]);
-    setShowAddHabit(false);
-  };
 
   const handleDeleteHabit = async (id: string) => {
     await deleteHabitApi(id);
@@ -100,9 +82,6 @@ export function HabitTable() {
       <DataTable
         columns={columns}
         data={habits}
-        showAddHabit={showAddHabit}
-        setShowAddHabit={setShowAddHabit}
-        onAddHabit={handleAddHabit}
         onDeleteHabit={handleDeleteHabit}
         refetchHabits={fetchHabits}
         showEditHabit={showEditHabit}

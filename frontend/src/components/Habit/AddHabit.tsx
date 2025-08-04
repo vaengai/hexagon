@@ -23,6 +23,8 @@ import type { HabitCategory } from "@/types/habitCategory";
 import type { HabitFrequency } from "@/types/habitFrequency";
 import { HABIT_FREQUENCY } from "@/types/habitFrequency";
 import type { Habit } from "@/types/habit";
+import { useAuth } from "@clerk/clerk-react";
+import axios from "axios";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -32,17 +34,45 @@ import { validateForm } from "@/common/habitUtils.ts";
 export function AddHabit({
   open,
   onClose,
-  onSubmit,
 }: {
   open: boolean;
   onClose: () => void;
-  onSubmit: (habit: Omit<Habit, "id">) => void;
 }) {
   const [selected, setSelected] = useState<HabitCategory | "">("");
   const [target, setTarget] = useState<number>(1);
   const [frequency, setFrequency] = useState<HabitFrequency | "">("");
   const [name, setName] = useState("");
   const [formErrors, setFormErrors] = useState<string[]>([]);
+
+  const addHabitApi = async (newHabit: Omit<Habit, "id">): Promise<Habit> => {
+    const url = `${import.meta.env.VITE_HEXAGON_API_BASE_URL}/habit`;
+    const token = await getToken();
+    const response = await axios.post(url, newHabit, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  };
+
+  const handleAddHabit = async (habitData: Omit<Habit, "id">) => {
+    try {
+      await addHabitApi(habitData);
+      onClose();
+    } catch (error: any) {
+      if (
+        error.response &&
+        error.response.status === 400 &&
+        error.response.data?.detail
+      ) {
+        setFormErrors([error.response.data.detail]);
+      } else {
+        setFormErrors(["Failed to add habit. Please try again."]);
+      }
+    }
+  };
+
+  const { getToken } = useAuth();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,7 +95,7 @@ export function AddHabit({
     }
 
     setFormErrors([]);
-    onSubmit(payload as Omit<Habit, "id">);
+    handleAddHabit(payload as Omit<Habit, "id">);
   };
 
   return (

@@ -11,11 +11,15 @@ async function updateStatusApi(
 ): Promise<string> {
   const url = `${import.meta.env.VITE_HEXAGON_API_BASE_URL}/habit/${encodeURIComponent(id)}/status/${encodeURIComponent(status)}`;
   const token = await getToken();
-  const response = await axios.patch(url, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const response = await axios.patch(
+    url,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
   return response.data.status;
 }
 

@@ -57,9 +57,6 @@ import { useWindowSize } from "@react-hook/window-size";
 type DataTableProps = {
   columns: ColumnDef<Habit, unknown>[];
   data: Habit[];
-  showAddHabit: boolean;
-  setShowAddHabit: (show: boolean) => void;
-  onAddHabit: (habit: Omit<Habit, "id">) => void;
   onDeleteHabit: (id: string) => void;
   refetchHabits: () => void;
   showEditHabit: boolean;
@@ -73,9 +70,6 @@ type DataTableProps = {
 export function DataTable({
   columns: baseColumns,
   data,
-  showAddHabit,
-  setShowAddHabit,
-  onAddHabit,
   onDeleteHabit,
   refetchHabits,
   showEditHabit,
@@ -85,6 +79,8 @@ export function DataTable({
   setShowConfetti,
   handleDone,
 }: DataTableProps) {
+  const [showAddHabit, setShowAddHabit] = React.useState(false);
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [editHabit, setEditHabit] = React.useState<Habit | null>(null);
   const [width, height] = useWindowSize();
@@ -136,8 +132,10 @@ export function DataTable({
       {showAddHabit && (
         <AddHabit
           open={showAddHabit}
-          onClose={() => setShowAddHabit(false)}
-          onSubmit={onAddHabit}
+          onClose={() => {
+            refetchHabits();
+            setShowAddHabit(false);
+          }}
         />
       )}
       {showEditHabit && editHabit && (
