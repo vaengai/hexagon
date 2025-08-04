@@ -8,9 +8,6 @@ import { Button } from "@/components/ui/button";
 import { IconDotsVertical } from "@tabler/icons-react";
 import { IconPencil } from "@tabler/icons-react";
 import { IconTrash } from "@tabler/icons-react";
-// import { useAuth } from "@clerk/clerk-react";
-// import axios from "axios";
-// import type { Habit } from "@/types/habit";
 
 export default function Action({
   habitId,

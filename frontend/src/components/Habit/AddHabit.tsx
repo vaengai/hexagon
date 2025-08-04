@@ -27,9 +27,7 @@ import type { Habit } from "@/types/habit";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import {validateForm} from "@/common/habitUtils.ts";
-
-
+import { validateForm } from "@/common/habitUtils.ts";
 
 export function AddHabit({
   open,
@@ -48,7 +46,6 @@ export function AddHabit({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // if (!name || !selected || !frequency) return;
     const PENDING_STATUS = "Pending" as const;
 
     const payload = {

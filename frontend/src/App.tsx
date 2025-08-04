@@ -7,8 +7,10 @@ import SignInPage from "./components/Login";
 import About from "./components/About";
 import HexagonLayout from "./components/HexagonLayout";
 import { RedirectToSignIn, SignedIn, SignedOut } from "@clerk/clerk-react";
+import { useSyncProfile } from "./hooks/useSyncProfile";
 
 export default function App() {
+  useSyncProfile();
   useEffect(() => {
     document.documentElement.classList.add("dark");
   }, []);

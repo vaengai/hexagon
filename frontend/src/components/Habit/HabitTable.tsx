@@ -5,7 +5,26 @@ import { DataTable } from "../ui/DataTable";
 import type { Habit } from "@/types/habit";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useAuth } from "@clerk/clerk-react";
+import { useUser, useAuth } from "@clerk/clerk-react";
+
+export function useSyncProfile() {
+  const { isSignedIn } = useUser();
+  const { getToken } = useAuth();
+
+  useEffect(() => {
+    const syncProfile = async () => {
+      const token = await getToken();
+      await axios.get(`${import.meta.env.VITE_HEXAGON_API_BASE_URL}/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    };
+    if (isSignedIn) {
+      syncProfile();
+    }
+  }, [isSignedIn, getToken]);
+}
 
 export function HabitTable() {
   const [habits, setHabits] = useState<Habit[]>([]);
