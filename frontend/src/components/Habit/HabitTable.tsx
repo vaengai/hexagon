@@ -50,7 +50,7 @@ export function HabitTable() {
     setTimeout(() => setShowConfetti(true), 10); // Show after a short delay
   };
 
-  const columns = baseColumns(handleDeleteHabit, fetchHabits, handleDone);
+  const columns = baseColumns(fetchHabits, handleDone);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 font-mono">
