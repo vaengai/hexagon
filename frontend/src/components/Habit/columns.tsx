@@ -91,12 +91,12 @@ export const baseColumns = (
   {
     id: "actions",
     header: "Actions",
-    cell: ({ row }) => (
-      <Action
-        habitId={row.original.id}
-        onEdit={handleEditHabit(row.original)}
-        onDelete={onDeleteHabit}
-      />
-    ),
+    // cell: ({ row }) => (
+    //   <Action
+    //     habitId={row.original.id}
+    //     onEdit={handleEditHabit(row.original)}
+    //     onDelete={onDeleteHabit}
+    //   />
+    // ),
   },
 ];
