@@ -1,10 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-const footerLinks = [
-  { to: "/about", label: "About" },
-  { to: "/support", label: "Support" },
-  { to: "/git", label: "Git" },
-];
+const footerLinks = [{ to: "/about", label: "About" }];
 
 export default function Footer() {
   const [email, setEmail] = useState("");
