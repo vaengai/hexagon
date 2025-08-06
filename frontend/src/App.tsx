@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import HexagonHome from "./components/HexagonHome";
 import SignInPage from "./components/Login";
 import About from "./components/About";
+import UnderConstruction from "./components/UnderConstruction";
 import HexagonLayout from "./components/HexagonLayout";
 import { RedirectToSignIn, SignedIn, SignedOut } from "@clerk/clerk-react";
 import { useSyncProfile } from "./hooks/useSyncProfile";
@@ -25,6 +26,7 @@ export default function App() {
           <Routes>
             <Route path="/sign-in" element={<SignInPage />} />
             <Route path="/" element={<HexagonHome />} />
+            <Route path="/UnderConstruction" element={<UnderConstruction />} />
             <Route
               path="/habit"
               element={

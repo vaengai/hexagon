@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { UserButton, useUser } from "@clerk/clerk-react";
 
 const navLinks = [
-  { to: "/Dashboard", label: "Dashboard" },
+  { to: "/UnderConstruction", label: "Dashboard" },
   { to: "/Habit", label: "Habit" },
-  { to: "/Journal", label: "Journal" },
-  { to: "/Todo", label: "Todo" },
-  { to: "/Notification", label: <IconBell /> },
+  { to: "/UnderConstruction", label: "Journal" },
+  { to: "/UnderConstruction", label: "Todo" },
+  { to: "/UnderConstruction", label: <IconBell /> },
 ];
 export default function Navbar() {
   const { isSignedIn } = useUser();

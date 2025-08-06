@@ -1,23 +1,23 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+// import { useEffect } from "react";
 const footerLinks = [{ to: "/about", label: "About" }];
 
 export default function Footer() {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  // const [email, setEmail] = useState("");
+  // const [submitted, setSubmitted] = useState(false);
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-    setEmail("");
-  };
+  // const handleNewsletterSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setSubmitted(true);
+  //   setEmail("");
+  // };
 
-  useEffect(() => {
-    if (submitted) {
-      const timer = setTimeout(() => setSubmitted(false), 2000);
-      return () => clearTimeout(timer);
-    }
-  });
+  // useEffect(() => {
+  //   if (submitted) {
+  //     const timer = setTimeout(() => setSubmitted(false), 2000);
+  //     return () => clearTimeout(timer);
+  //   }
+  // });
 
   return (
     <footer className="w-full bg-neutral-900/50 text-white py-4 px-8 mt-auto justify-between z-50">
@@ -27,7 +27,7 @@ export default function Footer() {
             {label}
           </Link>
         ))}
-        <div className="flex items-center ml-auto gap-2">
+        {/* <div className="flex items-center ml-auto gap-2">
           <form onSubmit={handleNewsletterSubmit}>
             <input
               type="email"
@@ -45,7 +45,7 @@ export default function Footer() {
             </button>
           </form>
           {submitted && <span className="text-2xl">🎉</span>}
-        </div>
+        </div> */}
       </div>
     </footer>
   );
