@@ -14,8 +14,8 @@ import { useClearSession } from "../hooks/useClearSession";
 
 export default function HexagonHome() {
   const navigate = useNavigate();
-  const { isSignedIn } = useUser();
-  const { clearSessionAndReload } = useClearSession();
+  //const { isSignedIn } = useUser();
+  //const { clearSessionAndReload } = useClearSession();
 
   // const [sentenceDone, setSentenceDone] = useState(false);
 
