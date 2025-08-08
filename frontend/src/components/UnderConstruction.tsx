@@ -50,19 +50,21 @@ export default function UnderConstruction() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          width: "85%",
+          width: "90%",
           margin: "0 auto",
-          fontSize: "4rem",
+          fontSize: "clamp(2rem, 5vw, 4rem)", // Responsive font size
           fontWeight: "bold",
           fontFamily: "monospace",
           textAlign: "center",
           flexDirection: "column",
-          marginTop: "10rem",
-          zIndex: 7,
+          marginTop: "clamp(5rem, 15vh, 10rem)", // Responsive top margin
+          zIndex: 50, // raised above background dots
+          padding: "1rem", // Add padding for mobile
+          position: "relative",
         }}
       >
         <TextType
-          text={["🚧 🚧 🚧 Under Construction 🚧 🚧 🚧"]}
+          text={["🚧 Under Construction 🚧"]}
           typingSpeed={100}
           pauseDuration={1000}
           showCursor={false}
@@ -73,39 +75,42 @@ export default function UnderConstruction() {
         />
         <div
           style={{
-            marginTop: "4.5rem",
-            fontSize: "1.5rem",
-            // color: "gray",
+            marginTop: "2.5rem",
+            fontSize: "clamp(1rem, 3vw, 1.5rem)", // Responsive subtitle
             fontWeight: 400,
             maxWidth: "700px",
-            zIndex: 8,
+            zIndex: 60, // ensure above background
+            lineHeight: "1.6", // Better line height for mobile
+            position: "relative",
           }}
         >
           Coming Soon. Stay tuned!
         </div>
-        <div>
-          <div className="flex items-center justify-center gap-1 mt-24">
-            <form onSubmit={handleNewsletterSubmit} className="flex z-50">
+        <div
+          className="w-full max-w-md mt-8"
+          style={{ position: "relative", zIndex: 60 }}
+        >
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
+            <form
+              onSubmit={handleNewsletterSubmit}
+              className="flex w-full max-w-sm"
+            >
               <input
                 type="email"
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-90 px-2 py-2 text-sm rounded-l-sm border focus:outline-1 bg-neutral-950"
+                className="flex-1 px-3 py-2 text-sm rounded-l-lg border focus:outline-1 bg-neutral-950 text-white"
               />
               <button
                 type="submit"
-                className="bg-sky-700 text-black px-3 py-1 text-sm rounded-r-sm border"
+                className="bg-[#eab676] text-black px-4 py-2 text-sm rounded-r-lg border hover:bg-[#d4a563] transition-colors"
               >
-                Get Notified
+                Subscribe
               </button>
             </form>
-
-            {submitted && <span className="text-lg ml-2">🎉</span>}
-          </div>
-          <div className="flex items-center justify-center gap-1 mt-2 text-sm text-muted-foreground">
-            Sign up now to get early notification about our launch
+            {submitted && <span className="text-lg ml-2">👍🏻</span>}
           </div>
         </div>
       </div>

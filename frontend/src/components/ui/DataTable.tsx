@@ -79,10 +79,10 @@ export function DataTable({
   const [editHabit, setEditHabit] = React.useState<Habit | null>(null);
   const [width, height] = useWindowSize();
 
-  const handleEditClick = (habit: Habit) => {
+  const handleEditClick = React.useCallback((habit: Habit) => {
     setEditHabit(habit);
     setShowEditHabit(true);
-  };
+  }, []);
 
   const columns = React.useMemo(
     () =>
@@ -148,27 +148,30 @@ export function DataTable({
       )}
 
       <Tabs
-        defaultValue="list-view"
-        className="w-full flex-col justify-start gap-6"
+        defaultValue="card-view"
+        className="w-full flex-col justify-start gap-6 mt-6 sm:mt-8"
       >
         <div className="flex items-center justify-between">
-          <TabsList className="**:data-[slot=badge]:bg-muted-foreground/30 **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full **:data-[slot=badge]:px-1 @4xl/main:flex">
+          {/* Hide tabs on mobile, only show on desktop */}
+          <TabsList className="hidden lg:flex **:data-[slot=badge]:bg-muted-foreground/30 **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full **:data-[slot=badge]:px-1 @4xl/main:flex">
             <TabsTrigger value="card-view">
               <IconLayoutGrid />
-              <span className="hidden lg:inline">Card view</span>
+              <span className="hidden xl:inline">Card view</span>
             </TabsTrigger>
             <TabsTrigger value="list-view">
               <IconLayoutList />
-              <span className="hidden lg:inline">List view</span>
+              <span className="hidden xl:inline">List view</span>
             </TabsTrigger>
           </TabsList>
+
           <div className="flex items-center gap-2 ml-auto text-sm">
+            {/* Hide column customization on mobile */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" className="hidden lg:flex">
                   <IconLayoutColumns />
-                  <span className="hidden lg:inline">Customize Columns</span>
-                  <span className="lg:hidden">Columns</span>
+                  <span className="hidden xl:inline">Customize Columns</span>
+                  <span className="xl:hidden">Columns</span>
                   <IconChevronDown />
                 </Button>
               </DropdownMenuTrigger>
@@ -200,16 +203,21 @@ export function DataTable({
               variant="outline"
               size="sm"
               onClick={() => setShowAddHabit(true)}
+              className="px-3 py-2"
             >
               <IconPlus />
-              <span className="hidden lg:inline">Add Habit</span>
+              <span className="hidden sm:inline ml-2">Add Habit</span>
             </Button>
           </div>
         </div>
-        <TabsContent value="list-view" className="relative flex flex-col gap-4">
-          <div className=" rounded-lg border overflow-hidden">
+        {/* Only show list view on desktop */}
+        <TabsContent
+          value="list-view"
+          className="relative flex-col gap-4 hidden lg:flex"
+        >
+          <div className="rounded-lg border overflow-hidden">
             <Table>
-              <TableHeader className="bg-sky-800 border">
+              <TableHeader className=" border">
                 {table.getHeaderGroups().map((headerGroup) => (
                   <TableRow key={headerGroup.id}>
                     {headerGroup.headers.map((header) => {
@@ -230,7 +238,6 @@ export function DataTable({
               <TableBody>
                 {table.getRowModel().rows?.length ? (
                   table.getRowModel().rows.map((row) => {
-                    // Assume "active" is a property on the original data object
                     const isActive = (row.original as Habit).active;
                     return (
                       <TableRow
@@ -269,19 +276,20 @@ export function DataTable({
             </Table>
           </div>
         </TabsContent>
-        <TabsContent value="card-view" className="relative">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {/* Card view - mobile first, always visible */}
+        <TabsContent value="card-view" className="relative block">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {data.map((habit) => (
               <Card
                 key={habit.id}
-                className={`rounded-xl shadow-md border-1 p-4 transition-transform hover:scale-[1.02] ${
+                className={`rounded-xl shadow-md border-1 p-3 sm:p-4 transition-transform hover:scale-[1.02] ${
                   !habit.active ? "bg-muted cursor-not-allowed opacity-30" : ""
                 }`}
                 tabIndex={habit.active ? 0 : -1}
                 aria-disabled={!habit.active}
               >
-                <CardHeader className="pb-2">
-                  <div className="mb-1 flex items-center">
+                <CardHeader className="pb-2 px-0 pt-0">
+                  <div className="mb-2 flex items-center justify-between">
                     <StatusButton
                       id={habit.id}
                       initialStatus={habit.status.toUpperCase()}
@@ -290,7 +298,7 @@ export function DataTable({
                       onDone={handleDone}
                     />
 
-                    <div className="ml-auto flex items-center gap-2">
+                    <div className="flex items-center gap-1 sm:gap-2">
                       <ToggleActive
                         habitId={habit.id}
                         currentState={habit.active}
@@ -303,23 +311,25 @@ export function DataTable({
                       />
                     </div>
                   </div>
-                  <CardTitle className="text-xl">{habit.title}</CardTitle>
-                  <CardDescription className=" text-sm text-muted-foreground">
+                  <CardTitle className="text-lg sm:text-xl">
+                    {habit.title}
+                  </CardTitle>
+                  <CardDescription className="text-xs sm:text-sm text-muted-foreground">
                     {habit.category}
                   </CardDescription>
                 </CardHeader>
 
-                <CardContent className="text-sm mb-4">
+                <CardContent className="text-sm mb-4 px-0 pb-0">
                   <div className="mt-2">
-                    <div className="flex justify-between text-sm text-muted-foreground mb-1">
+                    <div className="flex justify-between text-xs sm:text-sm text-muted-foreground mb-1">
                       <span>Progress</span>
                       <span>
                         {Math.round((habit.progress / habit.target) * 100)}%
                       </span>
                     </div>
-                    <div className="h-2 w-full bg-purple-100">
+                    <div className="h-2 w-full bg-purple-100 rounded-full">
                       <div
-                        className="h-full bg-sky-600 transition-all duration-300"
+                        className="h-full bg-sky-600 transition-all duration-300 rounded-full"
                         style={{
                           width: `${Math.min(100, Math.round((habit.progress / habit.target) * 100))}%`,
                         }}
@@ -330,6 +340,16 @@ export function DataTable({
               </Card>
             ))}
           </div>
+
+          {/* Show empty state when no habits */}
+          {data.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground text-lg">No habits yet!</p>
+              <p className="text-muted-foreground text-sm mt-2">
+                Create your first habit to get started.
+              </p>
+            </div>
+          )}
         </TabsContent>{" "}
       </Tabs>
     </>

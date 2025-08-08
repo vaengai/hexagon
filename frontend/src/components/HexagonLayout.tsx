@@ -10,7 +10,8 @@ export default function HexagonLayout({
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1">{children}</main>
+      {/* Add top padding to account for fixed navbar */}
+      <main className="flex-1 pt-16 sm:pt-20">{children}</main>
       <Footer />
     </div>
   );

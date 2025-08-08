@@ -7,14 +7,31 @@ import SignInPage from "./components/Login";
 import About from "./components/About";
 import UnderConstruction from "./components/UnderConstruction";
 import HexagonLayout from "./components/HexagonLayout";
-import { RedirectToSignIn, SignedIn, SignedOut } from "@clerk/clerk-react";
+import {
+  RedirectToSignIn,
+  SignedIn,
+  SignedOut,
+  useUser,
+} from "@clerk/clerk-react";
 import { useSyncProfile } from "./hooks/useSyncProfile";
 
 export default function App() {
+  const { isLoaded } = useUser();
+
   useSyncProfile();
+
   useEffect(() => {
     document.documentElement.classList.add("dark");
   }, []);
+
+  // Show loading while Clerk initializes
+  if (!isLoaded) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-900">
+        <div className="text-white text-xl">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <>

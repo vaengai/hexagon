@@ -8,14 +8,22 @@ export function useSyncProfile() {
 
   useEffect(() => {
     const syncProfile = async () => {
-      const token = await getToken();
-      await axios.get(`${import.meta.env.VITE_HEXAGON_API_BASE_URL}/profile`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      localStorage.setItem(`profileSynced:${user?.id}`, "true");
+      try {
+        const token = await getToken();
+        await axios.get(
+          `${import.meta.env.VITE_HEXAGON_API_BASE_URL}/profile`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        localStorage.setItem(`profileSynced:${user?.id}`, "true");
+      } catch (error) {
+        console.error("Profile sync failed:", error);
+      }
     };
+
     if (
       isSignedIn &&
       user?.id &&
@@ -23,5 +31,5 @@ export function useSyncProfile() {
     ) {
       syncProfile();
     }
-  });
+  }, [isSignedIn, user?.id, getToken]); // Add dependencies to prevent infinite rerenders
 }
