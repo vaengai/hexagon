@@ -7,6 +7,7 @@ import SignInPage from "./components/Login";
 import About from "./components/About";
 import UnderConstruction from "./components/UnderConstruction";
 import HexagonLayout from "./components/HexagonLayout";
+import NotFound from "./components/NotFound";
 import {
   RedirectToSignIn,
   SignedIn,
@@ -58,6 +59,8 @@ export default function App() {
               }
             />
             <Route path="/about" element={<About />} />
+            {/* Catch-all route for 404 pages */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </HexagonLayout>
       </Router>

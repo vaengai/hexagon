@@ -74,7 +74,7 @@ export default function Navbar() {
   }, [isMobileMenuOpen]);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-[60] bg-neutral-900 border-b border-neutral-900/50 shadow-lg">
+    <header className="fixed top-0 left-0 w-full z-[60] bg-zinc-950 shadow-lg">
       <div className="flex justify-between items-center py-3 px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link

@@ -41,6 +41,7 @@ export default function ToggleActive({
       id="active-status-ind"
       checked={active}
       onCheckedChange={handleToggle}
+      className="data-[state=checked]:bg-blue-500 data-[state=unchecked]:bg-input focus-visible:border-ring focus-visible:ring-ring/50 dark:data-[state=unchecked]:bg-input/80"
     />
   );
 }
