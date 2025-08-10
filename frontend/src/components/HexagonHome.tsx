@@ -3,8 +3,8 @@ import DotGrid from "./backgrounds/DotGrid/DotGrid";
 // import React, { useState } from "react";
 // import { PlusIcon } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "@clerk/clerk-react";
-import { useClearSession } from "../hooks/useClearSession";
+//import { useUser } from "@clerk/clerk-react";
+//import { useClearSession } from "../hooks/useClearSession";
 // import Navbar from "./Navbar";
 // import Footer from "./Footer";
 // import TextType from "./animations/TextType/TextType";
@@ -15,8 +15,8 @@ import { Button } from "./ui/button";
 
 export default function HexagonHome() {
   const navigate = useNavigate();
-  const { isSignedIn } = useUser();
-  const { clearSessionAndReload } = useClearSession();
+  //const { isSignedIn } = useUser();
+  //const { clearSessionAndReload } = useClearSession();
 
   // const [sentenceDone, setSentenceDone] = useState(false);
 
