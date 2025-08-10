@@ -215,11 +215,14 @@ export function DataTable({
           value="list-view"
           className="relative flex-col gap-4 hidden lg:flex"
         >
-          <div className="rounded-lg border overflow-hidden">
+          <div className="rounded-lg border overflow-hidden bg-gray-900">
             <Table>
-              <TableHeader className=" border">
+              <TableHeader className="bg-gray-800 dark:bg-gray-700 border">
                 {table.getHeaderGroups().map((headerGroup) => (
-                  <TableRow key={headerGroup.id}>
+                  <TableRow
+                    key={headerGroup.id}
+                    className="hover:bg-transparent"
+                  >
                     {headerGroup.headers.map((header) => {
                       return (
                         <TableHead className="py-2 px-4" key={header.id}>
@@ -282,7 +285,7 @@ export function DataTable({
             {data.map((habit) => (
               <Card
                 key={habit.id}
-                className={`rounded-xl shadow-md border-1 p-3 sm:p-4 transition-transform hover:scale-[1.02] ${
+                className={`rounded-xl dark:bg-gray-800 shadow-md border-1 p-3 sm:p-4 transition-transform hover:scale-[1.02] ${
                   !habit.active ? "bg-muted cursor-not-allowed opacity-30" : ""
                 }`}
                 tabIndex={habit.active ? 0 : -1}

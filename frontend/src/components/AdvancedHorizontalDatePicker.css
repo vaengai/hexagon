@@ -1,0 +1,241 @@
+/* Advanced Horizontal Date Picker Styles */
+.advanced-horizontal-date-picker {
+  width: 100%;
+  font-family:
+    "Monaco", "Menlo", "Ubuntu Mono", "Consolas", "source-code-pro", monospace;
+}
+
+/* Header */
+.picker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+}
+
+.current-date-display h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.today-button {
+  padding: 0.5rem 1rem;
+  /* background: linear-gradient(135deg, #3b82f6, #8b5cf6); - Removed to allow Tailwind overrides */
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.today-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Dates Container */
+.dates-scroll-container {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+  scroll-behavior: smooth;
+}
+
+.dates-scroll-container::-webkit-scrollbar {
+  height: 0px;
+  width: 0px;
+  background: transparent;
+}
+
+.dates-scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dates-scroll-container::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.dates-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: transparent;
+}
+
+/* Firefox scrollbar hiding */
+.dates-scroll-container {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Date Items */
+.advanced-date-item {
+  min-width: 70px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 0.5rem;
+  border: 2px solid transparent;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--card);
+  position: relative;
+}
+
+.advanced-date-item:hover {
+  border-color: var(--border);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.advanced-date-item.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.advanced-date-item.selected {
+  /* background: linear-gradient(135deg, #3b82f6, #8b5cf6); - Removed to allow Tailwind overrides */
+  color: white;
+  border-color: #3b82f6;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+}
+
+.advanced-date-item.today {
+  border-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.advanced-date-item.today.selected {
+  /* background: linear-gradient(135deg, #f59e0b, #d97706); - Removed to allow Tailwind overrides */
+  border-color: #f59e0b;
+}
+
+/* Date Content */
+.date-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+}
+
+.weekday {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+}
+
+.day-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.month {
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+}
+
+/* Event Indicators */
+.event-indicators {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.25rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.event-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.7;
+}
+
+.advanced-date-item.selected .event-dot {
+  background: white;
+}
+
+.more-events {
+  font-size: 0.6rem;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.advanced-date-item.has-events {
+  position: relative;
+}
+
+.advanced-date-item.has-events::after {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 6px;
+  height: 6px;
+  background: #10b981;
+  border-radius: 50%;
+  border: 1px solid var(--card);
+}
+
+.advanced-date-item.selected.has-events::after {
+  border-color: #3b82f6;
+}
+
+/* Dark mode adjustments */
+.dark .advanced-date-item {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .advanced-date-item:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .picker-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .current-date-display {
+    flex: 1;
+  }
+
+  .current-date-display h3 {
+    font-size: 1.1rem;
+  }
+
+  .today-button {
+    flex-shrink: 0;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.875rem;
+  }
+
+  .advanced-date-item {
+    min-width: 60px;
+    height: 80px;
+    padding: 0.5rem 0.25rem;
+  }
+
+  .day-number {
+    font-size: 1.25rem;
+  }
+}

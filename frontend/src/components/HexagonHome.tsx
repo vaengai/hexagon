@@ -9,7 +9,8 @@ import { useClearSession } from "../hooks/useClearSession";
 // import Footer from "./Footer";
 // import TextType from "./animations/TextType/TextType";
 // import DarkVeil from "./backgrounds/DarkVeil/DarkVeil";
-
+import { Link } from "react-router-dom";
+import { Button } from "./ui/button";
 // import { ReactNode } from "react";
 
 export default function HexagonHome() {
@@ -104,7 +105,7 @@ export default function HexagonHome() {
           Stay consistent, track your progress, and become the best version of
           yourself!
         </div>
-        <div className="flex flex-col sm:flex-row justify-center items-center mt-10 z-10 gap-4 w-full max-w-sm">
+        {/* <div className="flex flex-col sm:flex-row justify-center items-center mt-10 z-10 gap-4 w-full max-w-sm">
           <button
             onClick={() => navigate("/habit")}
             className="w-full rounded-lg shadow-2xs hover:shadow-lg cursor-pointer p-2 flex flex-col items-center bg-sky-800 border-sky-600 shadow-sky-200 border-0 min-w-[140px]"
@@ -112,6 +113,13 @@ export default function HexagonHome() {
           >
             <p className="text-lg font-extrabold text-center">Get Started</p>
           </button>
+        </div> */}
+        <div className="space-y-4 mt-24 text-sm">
+          <Link to="/habit">
+            <Button className="mx-auto w-full rounded-lg shadow-2xs hover:shadow-lg cursor-pointer p-2 flex flex-col items-center bg-sky-800 border-sky-600 shadow-sky-200 border-0 min-w-[140px] max-w-sm">
+              Get Started
+            </Button>
+          </Link>
         </div>
       </div>
       {/* </div> */}

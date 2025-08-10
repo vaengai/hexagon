@@ -6,10 +6,12 @@ import type { Habit } from "@/types/habit";
 import { useEffect, useState, useCallback, useRef } from "react";
 import axios from "axios";
 import { useAuth } from "@clerk/clerk-react";
+import AdvancedHorizontalDatePicker from "../AdvancedHorizontalDatePicker";
 
 export function HabitTable() {
   const [habits, setHabits] = useState<Habit[]>([]);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const orderRef = useRef<string[]>([]); // keeps stable order of habit IDs
 
   const { getToken } = useAuth();
@@ -20,26 +22,42 @@ export function HabitTable() {
     if (!existingOrder.length) {
       const ids = incoming.map((h) => h.id);
       orderRef.current = ids;
-      return incoming;
+      // Sort by active status: active habits first, then inactive
+      return incoming.sort((a, b) => {
+        if (a.active === b.active) return 0;
+        return a.active ? -1 : 1; // active habits (-1) come before inactive (1)
+      });
     }
 
     // Map incoming by id for quick lookup
     const map = new Map<string, Habit>(incoming.map((h) => [h.id, h]));
-    const sorted: Habit[] = [];
+    const activeHabits: Habit[] = [];
+    const inactiveHabits: Habit[] = [];
 
-    // Keep existing items in the same relative order
+    // Keep existing items in the same relative order, but separate by active status
     for (const id of existingOrder) {
       const h = map.get(id);
       if (h) {
-        sorted.push(h);
+        if (h.active) {
+          activeHabits.push(h);
+        } else {
+          inactiveHabits.push(h);
+        }
         map.delete(id);
       }
     }
 
-    // Append any new items to the end (e.g., newly created habits)
+    // Append any new items to the appropriate list
     for (const h of map.values()) {
-      sorted.push(h);
+      if (h.active) {
+        activeHabits.push(h);
+      } else {
+        inactiveHabits.push(h);
+      }
     }
+
+    // Combine active habits first, then inactive habits
+    const sorted = [...activeHabits, ...inactiveHabits];
 
     // Update the stored order
     orderRef.current = sorted.map((h) => h.id);
@@ -87,17 +105,36 @@ export function HabitTable() {
 
   const columns = baseColumns(fetchHabits, handleDone);
 
+  const handleDateSelect = (date: Date) => {
+    setSelectedDate(date);
+    // You can add logic here to filter habits by date if needed
+  };
+
   return (
-    <div className="px-2 sm:px-4 lg:px-8 font-mono pt-6 sm:pt-8">
-      <DataTable
-        columns={columns}
-        data={habits}
-        onDeleteHabit={(id) => handleDeleteHabit(id)}
-        refetchHabits={fetchHabits}
-        showConfetti={showConfetti}
-        setShowConfetti={setShowConfetti}
-        handleDone={handleDone}
-      />
+    <div className="min-h-screen">
+      <div className="px-2 sm:px-4 lg:px-8 font-mono pt-6 sm:pt-8">
+        <AdvancedHorizontalDatePicker
+          onDateSelect={handleDateSelect}
+          selectedDate={selectedDate}
+          showToday={true}
+          className="my-8"
+          styles={{
+            container: "bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4",
+            selectedDateItem: "!bg-blue-400 text-white scale-105", // Force blue background with !important
+            todayButton:
+              "bg-blue-400 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-200",
+          }}
+        />
+        <DataTable
+          columns={columns}
+          data={habits}
+          onDeleteHabit={(id) => handleDeleteHabit(id)}
+          refetchHabits={fetchHabits}
+          showConfetti={showConfetti}
+          setShowConfetti={setShowConfetti}
+          handleDone={handleDone}
+        />
+      </div>
     </div>
   );
 }
