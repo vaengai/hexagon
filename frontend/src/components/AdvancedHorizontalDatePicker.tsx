@@ -122,14 +122,14 @@ const AdvancedHorizontalDatePicker: React.FC<
       {/* Header */}
       <div className={cn("picker-header", styles.header)}>
         <div className={cn("current-date-display", styles.currentDateDisplay)}>
-          <h3>
+          <h5>
             {currentDate.toLocaleDateString("en", {
               weekday: "long",
               month: "long",
               day: "numeric",
               year: "numeric",
             })}
-          </h3>
+          </h5>
         </div>
 
         {showToday && (

@@ -111,18 +111,24 @@ export function HabitTable() {
   };
 
   return (
-    <div className="min-h-screen">
-      <div className="px-2 sm:px-4 lg:px-8 font-mono pt-6 sm:pt-8">
+    <div className="min-h-screen bg-gradient-to-r via-slate-300 dark:from-zinc-950 dark:via-slate-900 dark:to-zinc-950 ">
+      <div className="pt-1 pb-8 px-2 sm:px-4 lg:px-8 font-mono">
         <AdvancedHorizontalDatePicker
           onDateSelect={handleDateSelect}
           selectedDate={selectedDate}
           showToday={true}
           className="my-8"
           styles={{
-            container: "bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4",
-            selectedDateItem: "!bg-blue-400 text-white scale-105", // Force blue background with !important
+            container: "bg-white bg-transparent rounded-lg",
+            header: "mb-4",
+            currentDateDisplay: "[&_h3]:text-xs [&_h3]:font-medium", // Target the h3 directly
+            selectedDateItem:
+              "!bg-blue-400 dark:text-white text-black scale-105",
             todayButton:
-              "bg-blue-400 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-200",
+              "dark:bg-zinc-950 dark:bg-[#141518] border border-zinc-700 hover:border-zinc-600 rounded-lg dark:text-white text-xs py-1.5 px-3 transition-all duration-200",
+            weekday: "text-xs",
+            dayNumber: "text-sm font-medium",
+            month: "text-xs",
           }}
         />
         <DataTable

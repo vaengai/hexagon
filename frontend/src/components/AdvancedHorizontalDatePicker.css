@@ -16,7 +16,7 @@
 
 .current-date-display h3 {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 0.875rem; /* Changed from 1.25rem to 0.875rem (14px) */
   font-weight: 600;
   color: var(--foreground);
 }
@@ -24,12 +24,12 @@
 .today-button {
   padding: 0.5rem 1rem;
   /* background: linear-gradient(135deg, #3b82f6, #8b5cf6); - Removed to allow Tailwind overrides */
-  color: white;
-  border: none;
+  border: 1px solid var(--card);
   border-radius: 0.5rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  /* background-color: #141518; */
 }
 
 .today-button:hover {
@@ -79,8 +79,8 @@
   align-items: center;
   justify-content: center;
   padding: 0.75rem 0.5rem;
-  border: 2px solid transparent;
-  border-radius: 0.75rem;
+  /* border: 2px solid transparent; */
+  border-radius: 0.5rem;
   cursor: pointer;
   transition: all 0.2s ease;
   background: var(--card);
@@ -135,7 +135,7 @@
 }
 
 .day-number {
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1;
 }
@@ -220,7 +220,7 @@
   }
 
   .current-date-display h3 {
-    font-size: 1.1rem;
+    font-size: 0.75rem; /* Changed from 1.1rem to 0.75rem (12px) for mobile */
   }
 
   .today-button {

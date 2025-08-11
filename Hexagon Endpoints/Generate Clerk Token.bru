@@ -1,0 +1,19 @@
+meta {
+  name: Generate Clerk Token
+  type: http
+  seq: 10
+}
+
+get {
+  url: https://api.clerk.com/v1/users/user_30nT2xjvh6NhBMMf46m2pvQsWFF
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: sk_test_EYHRZO0IkwSUyZhChcGNdW8Amyys79ZNRwt5ZVYvV3
+}
+
+settings {
+  encodeUrl: true
+}

@@ -28,7 +28,7 @@ export default function App() {
   // Show loading while Clerk initializes
   if (!isLoaded) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-900">
+      <div className="min-h-screen flex items-center justify-center bg-slate-900">
         <div className="text-white text-xl">Loading...</div>
       </div>
     );

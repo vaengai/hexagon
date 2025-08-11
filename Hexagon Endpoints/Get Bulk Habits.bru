@@ -1,0 +1,19 @@
+meta {
+  name: Get Bulk Habits
+  type: http
+  seq: 11
+}
+
+get {
+  url: {{hexagon_base_url}}/bulk/habits/10
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJSUzI1NiIsImNhdCI6ImNsX0I3ZDRQRDExMUFBQSIsImtpZCI6Imluc18zMGZUYW50TDg3MjJyY1Q2dUhyR2J6T3BSbkwiLCJ0eXAiOiJKV1QifQ.eyJhenAiOiJodHRwOi8vbG9jYWxob3N0OjUxNzMiLCJleHAiOjE3NTQ4NTM2NDUsImZ2YSI6WzEyNzQsLTFdLCJpYXQiOjE3NTQ4NTM1ODUsImlzcyI6Imh0dHBzOi8vcGxlYXNlZC1oZWRnZWhvZy0xMC5jbGVyay5hY2NvdW50cy5kZXYiLCJuYmYiOjE3NTQ4NTM1NzUsInNpZCI6InNlc3NfMzE0SW9sSGNwbHZiODJwVHZxMDhadnpqTEZVIiwic3ViIjoidXNlcl8zMG5UMnhqdmg2TmhCTU1mNDZtMnB2UXNXRkYiLCJ2IjoyfQ.MKEf5UgVyaPElcfglLW5MKfy8UzvQu6ugOJ-YMKrF0d3kyshwWZxiEzldfX7gPMuGn7B-hLPu40dIDL7hGs6SU-K7TE-PXY8cmsafwTVNz5jfzEGdKiwn3XuUZbJzSGZCX-p2K50fk2tbmwuY5qG6e-WWj7ejbqE_Oi5-Su4RNuJZU-350cQcJJ2SxNdAXkByyhpZcKqufZsOxNu-xpfz3kwHH8zxGpRSrUPTx5wpxrT4wRtUJOZTXnwLO9Pq1XC_RUvO5QbeZKN9slurDgbGrljvvF_IhH4Oh7mOrEWTavrVy3MOK7JOhWpboKKH0FOym8JKCvyIhVKs5XBnhOPKw
+}
+
+settings {
+  encodeUrl: true
+}

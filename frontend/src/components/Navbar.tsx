@@ -84,8 +84,8 @@ export default function Navbar() {
         >
           <IconHexagonLetterH
             size={50}
-            color="#eab676"
-            className="sm:w-[60px] sm:h-[60px]"
+            // color="#eab676"
+            className="sm:w-[60px] sm:h-[60px] text-slate-500"
           />
         </Link>
 

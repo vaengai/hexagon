@@ -53,6 +53,7 @@ import type { Habit } from "@/types/habit";
 import StatusButton from "../Habit/StatusButton";
 import ToggleActive from "../Habit/ToggleActive";
 import { useWindowSize } from "@react-hook/window-size";
+import SpotlightCard from "../animations/SpotlightCard/SpotlightCard";
 
 type DataTableProps = {
   columns: ColumnDef<Habit, unknown>[];
@@ -215,9 +216,9 @@ export function DataTable({
           value="list-view"
           className="relative flex-col gap-4 hidden lg:flex"
         >
-          <div className="rounded-lg border overflow-hidden bg-gray-900">
+          <div className="rounded-lg border overflow-hidden dark:bg-gray-900">
             <Table>
-              <TableHeader className="bg-gray-800 dark:bg-gray-700 border">
+              <TableHeader className=" dark:bg-gray-700 border">
                 {table.getHeaderGroups().map((headerGroup) => (
                   <TableRow
                     key={headerGroup.id}
@@ -282,66 +283,82 @@ export function DataTable({
         {/* Card view - mobile first, always visible */}
         <TabsContent value="card-view" className="relative block">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-            {data.map((habit) => (
-              <Card
-                key={habit.id}
-                className={`rounded-xl dark:bg-gray-800 shadow-md border-1 p-3 sm:p-4 transition-transform hover:scale-[1.02] ${
-                  !habit.active ? "bg-muted cursor-not-allowed opacity-30" : ""
-                }`}
-                tabIndex={habit.active ? 0 : -1}
-                aria-disabled={!habit.active}
-              >
-                <CardHeader className="pb-2 px-0 pt-0">
-                  <div className="mb-2 flex items-center justify-between">
-                    <StatusButton
-                      id={habit.id}
-                      initialStatus={habit.status.toUpperCase()}
-                      refetchHabits={refetchHabits}
-                      disabled={!habit.active}
-                      onDone={handleDone}
-                    />
+            {data.map((habit) => {
+              // Determine the left border color based on status
+              const getStatusBorderClass = (status: string) => {
+                switch (status.toLowerCase()) {
+                  case "done":
+                    return "border-l-green-500";
+                  case "pending":
+                    return "border-l-gray-400";
+                  default:
+                    return "border-l-gray-400";
+                }
+              };
 
-                    <div className="flex items-center gap-1 sm:gap-2">
-                      <ToggleActive
-                        habitId={habit.id}
-                        currentState={habit.active}
+              return (
+                <Card
+                  key={habit.id}
+                  className={`rounded-lg dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-950 dark:via-slate-900 shadow-md border-1 border-l-4 ${getStatusBorderClass(habit.status)} p-3 sm:p-4 transition-transform hover:scale-[1.02] hover:border-2 hover:border-slate-700 ${
+                    !habit.active
+                      ? "bg-muted cursor-not-allowed opacity-30"
+                      : ""
+                  }`}
+                  tabIndex={habit.active ? 0 : -1}
+                  aria-disabled={!habit.active}
+                >
+                  <CardHeader className="pb-2 px-0 pt-0">
+                    <div className="mb-2 flex items-center justify-between">
+                      <StatusButton
+                        id={habit.id}
+                        initialStatus={habit.status.toUpperCase()}
                         refetchHabits={refetchHabits}
+                        disabled={!habit.active}
+                        onDone={handleDone}
                       />
-                      <Action
-                        habitId={habit.id}
-                        onEdit={() => handleEditClick(habit)}
-                        onDelete={onDeleteHabit}
-                      />
-                    </div>
-                  </div>
-                  <CardTitle className="text-lg sm:text-xl">
-                    {habit.title}
-                  </CardTitle>
-                  <CardDescription className="text-xs sm:text-sm text-muted-foreground">
-                    {habit.category}
-                  </CardDescription>
-                </CardHeader>
 
-                <CardContent className="text-sm mb-4 px-0 pb-0">
-                  <div className="mt-2">
-                    <div className="flex justify-between text-xs sm:text-sm text-muted-foreground mb-1">
-                      <span>Progress</span>
-                      <span>
-                        {Math.round((habit.progress / habit.target) * 100)}%
-                      </span>
+                      <div className="flex items-center gap-1 sm:gap-2">
+                        <ToggleActive
+                          habitId={habit.id}
+                          currentState={habit.active}
+                          refetchHabits={refetchHabits}
+                        />
+                        <Action
+                          habitId={habit.id}
+                          onEdit={() => handleEditClick(habit)}
+                          onDelete={onDeleteHabit}
+                        />
+                      </div>
                     </div>
-                    <div className="h-2 w-full bg-purple-100 rounded-full">
-                      <div
-                        className="h-full bg-sky-600 transition-all duration-300 rounded-full"
-                        style={{
-                          width: `${Math.min(100, Math.round((habit.progress / habit.target) * 100))}%`,
-                        }}
-                      />
+                    <CardTitle className="text-lg sm:text-xl">
+                      {habit.title}
+                    </CardTitle>
+                    <CardDescription className="text-xs sm:text-sm text-muted-foreground">
+                      {habit.category}
+                    </CardDescription>
+                  </CardHeader>
+
+                  <CardContent className="text-sm mb-4 px-0 pb-0">
+                    <div className="mt-2">
+                      <div className="flex justify-between text-xs sm:text-sm text-muted-foreground mb-1">
+                        <span>Progress</span>
+                        <span>
+                          {Math.round((habit.progress / habit.target) * 100)}%
+                        </span>
+                      </div>
+                      <div className="h-2 w-full bg-purple-100 rounded-full">
+                        <div
+                          className="h-full bg-sky-600 transition-all duration-300 rounded-full"
+                          style={{
+                            width: `${Math.min(100, Math.round((habit.progress / habit.target) * 100))}%`,
+                          }}
+                        />
+                      </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
 
           {/* Show empty state when no habits */}
