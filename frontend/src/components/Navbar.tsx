@@ -83,9 +83,11 @@ export default function Navbar() {
           onClick={closeMobileMenu}
         >
           <IconHexagonLetterH
+            title="Hexagon"
+            stroke="1"
             size={50}
             // color="#eab676"
-            className="sm:w-[60px] sm:h-[60px] text-slate-500"
+            className="sm:w-[60px] sm:h-[60px] text-slate-200 hover:text-yellow-500 hover:drop-shadow-[0_4px_8px_rgba(234,179,118,0.6)] transition-all duration-200"
           />
         </Link>
 
@@ -162,7 +164,7 @@ export default function Navbar() {
       {isMobileMenuOpen && (
         <div
           id="mobile-menu"
-          className="lg:hidden bg- border-t border-slate-900"
+          className="lg:hidden border-t border-slate-900"
           aria-label="Primary"
         >
           <nav className="flex flex-col py-4">

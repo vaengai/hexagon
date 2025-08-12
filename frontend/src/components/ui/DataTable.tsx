@@ -17,6 +17,7 @@ import {
   IconLayoutColumns,
   IconLayoutGrid,
   IconLayoutList,
+  IconTrophy, // ✅ Add trophy icon import
 } from "@tabler/icons-react";
 
 import {
@@ -217,8 +218,8 @@ export function DataTable({
           className="relative flex-col gap-4 hidden lg:flex"
         >
           <div className="rounded-lg border overflow-hidden dark:bg-gray-900">
-            <Table>
-              <TableHeader className=" dark:bg-gray-700 border">
+            <Table className="dark:bg-transparent">
+              <TableHeader className=" ">
                 {table.getHeaderGroups().map((headerGroup) => (
                   <TableRow
                     key={headerGroup.id}
@@ -296,10 +297,16 @@ export function DataTable({
                 }
               };
 
+              // Calculate progress percentage
+              const progressPercentage = Math.round(
+                (habit.progress / habit.target) * 100
+              );
+              const isCompleted = progressPercentage >= 100;
+
               return (
                 <Card
                   key={habit.id}
-                  className={`rounded-lg dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-950 dark:via-slate-900 shadow-md border-1 border-l-4 ${getStatusBorderClass(habit.status)} p-3 sm:p-4 transition-transform hover:scale-[1.02] hover:border-2 hover:border-slate-700 ${
+                  className={`rounded-lg dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-950 dark:via-slate-900 shadow-md border-0 border-l-12 ${getStatusBorderClass(habit.status)} p-3 sm:p-4 transition-transform hover:scale-[1.02] hover:border-1 hover:border-slate-700 hover:shadow-xl hover:shadow-zinc-800  hover:dark:shadow-lg hover:dark:shadow-muted-foreground ${
                     !habit.active
                       ? "bg-muted cursor-not-allowed opacity-30"
                       : ""
@@ -318,6 +325,16 @@ export function DataTable({
                       />
 
                       <div className="flex items-center gap-1 sm:gap-2">
+                        {/* Trophy icon for 100% completion */}
+                        {isCompleted && (
+                          <div className="flex items-center justify-center w-8 h-8 bg-yellow-100 dark:bg-yellow-900/30 rounded-full">
+                            <IconTrophy
+                              size={16}
+                              className="text-yellow-600 dark:text-yellow-400"
+                              title="100% Complete!"
+                            />
+                          </div>
+                        )}
                         <ToggleActive
                           habitId={habit.id}
                           currentState={habit.active}
@@ -330,8 +347,16 @@ export function DataTable({
                         />
                       </div>
                     </div>
-                    <CardTitle className="text-lg sm:text-xl">
+                    <CardTitle className="text-lg sm:text-xl flex items-center gap-2">
                       {habit.title}
+                      {/* Alternative: Trophy next to title */}
+                      {/* {isCompleted && (
+                        <IconTrophy 
+                          size={20} 
+                          className="text-yellow-600 dark:text-yellow-400" 
+                          title="100% Complete!"
+                        />
+                      )} */}
                     </CardTitle>
                     <CardDescription className="text-xs sm:text-sm text-muted-foreground">
                       {habit.category}
@@ -341,16 +366,33 @@ export function DataTable({
                   <CardContent className="text-sm mb-4 px-0 pb-0">
                     <div className="mt-2">
                       <div className="flex justify-between text-xs sm:text-sm text-muted-foreground mb-1">
-                        <span>Progress</span>
-                        <span>
-                          {Math.round((habit.progress / habit.target) * 100)}%
+                        <span className="flex items-center gap-1">
+                          Progress
+                          {isCompleted && (
+                            <span className="text-yellow-600 dark:text-yellow-400 font-semibold">
+                              ✨ Complete!
+                            </span>
+                          )}
+                        </span>
+                        <span
+                          className={
+                            isCompleted
+                              ? "text-yellow-600 dark:text-yellow-400 font-bold"
+                              : ""
+                          }
+                        >
+                          {progressPercentage}%
                         </span>
                       </div>
-                      <div className="h-2 w-full bg-purple-100 rounded-full">
+                      <div className="h-2 w-full bg-purple-100 dark:bg-purple-900/30 rounded-full">
                         <div
-                          className="h-full bg-sky-600 transition-all duration-300 rounded-full"
+                          className={`h-full transition-all duration-300 rounded-full ${
+                            isCompleted
+                              ? "bg-gradient-to-r from-yellow-400 to-yellow-600"
+                              : "bg-sky-600"
+                          }`}
                           style={{
-                            width: `${Math.min(100, Math.round((habit.progress / habit.target) * 100))}%`,
+                            width: `${Math.min(100, progressPercentage)}%`,
                           }}
                         />
                       </div>
