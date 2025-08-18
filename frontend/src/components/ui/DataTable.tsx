@@ -289,11 +289,11 @@ export function DataTable({
               const getStatusBorderClass = (status: string) => {
                 switch (status.toLowerCase()) {
                   case "done":
-                    return "border-l-green-500";
+                    return "border-l-green-700";
                   case "pending":
-                    return "border-l-gray-400";
+                    return "dark:border-l-zinc-200 border-l-zinc-700";
                   default:
-                    return "border-l-gray-400";
+                    return "dark:border-l-zinc-200 border-l-zinc-700";
                 }
               };
 
@@ -306,7 +306,7 @@ export function DataTable({
               return (
                 <Card
                   key={habit.id}
-                  className={`rounded-lg dark:bg-gradient-to-r dark:from-zinc-950 dark:to-zinc-950 dark:via-slate-900 shadow-md border-0 border-l-12 ${getStatusBorderClass(habit.status)} p-3 sm:p-4 transition-transform hover:scale-[1.02] hover:border-1 hover:border-slate-700 hover:shadow-xl hover:shadow-zinc-800  hover:dark:shadow-lg hover:dark:shadow-muted-foreground ${
+                  className={`rounded-lg border-1 shadow-md border-l-12 ${getStatusBorderClass(habit.status)} p-3 sm:p-4 transition-transform hover:scale-[1.02] hover:border-1 hover:border-slate-700 hover:shadow-xl hover:shadow-zinc-800  hover:dark:shadow-lg hover:dark:shadow-muted-foreground ${
                     !habit.active
                       ? "bg-muted cursor-not-allowed opacity-30"
                       : ""
@@ -368,16 +368,16 @@ export function DataTable({
                       <div className="flex justify-between text-xs sm:text-sm text-muted-foreground mb-1">
                         <span className="flex items-center gap-1">
                           Progress
-                          {isCompleted && (
+                          {/* {isCompleted && (
                             <span className="text-yellow-600 dark:text-yellow-400 font-semibold">
                               ✨ Complete!
                             </span>
-                          )}
+                          )} */}
                         </span>
                         <span
                           className={
                             isCompleted
-                              ? "text-yellow-600 dark:text-yellow-400 font-bold"
+                              ? "text-green-600 dark:text-green-400 font-bold"
                               : ""
                           }
                         >
@@ -388,7 +388,7 @@ export function DataTable({
                         <div
                           className={`h-full transition-all duration-300 rounded-full ${
                             isCompleted
-                              ? "bg-gradient-to-r from-yellow-400 to-yellow-600"
+                              ? "bg-gradient-to-r from-green-400 to-green-700 to-60%"
                               : "bg-sky-600"
                           }`}
                           style={{

@@ -111,7 +111,7 @@ export function HabitTable() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r via-slate-300 dark:from-zinc-950 dark:via-[#805D93] dark:to-zinc-950 ">
+    <div className="min-h-screen">
       <div className="pt-1 pb-8 px-2 sm:px-4 lg:px-8 font-mono">
         <AdvancedHorizontalDatePicker
           onDateSelect={handleDateSelect}
